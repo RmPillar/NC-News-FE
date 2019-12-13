@@ -12,7 +12,7 @@ class App extends Component {
         <Header />
         <Navbar />
         <Router>
-          <ArticleList path='/' />
+          <ArticleList path='/*' />
         </Router>
       </main>
     );

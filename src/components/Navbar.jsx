@@ -16,14 +16,13 @@ class Navbar extends Component {
         })
     }
 
-
     render() {
         const {topics} = this.state
         return (
             <nav>
                 <Link to='/'><button>Home</button></Link>
                 {topics.map(topic => {
-                    return <Link to ={`/topics/${topic.slug}`}key={topic.slug}>
+                    return <Link to ={`/${topic.slug}`}key={topic.slug}>
                         <button >{topic.slug}</button>
                     </Link>
                 })}
