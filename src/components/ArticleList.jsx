@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import * as api from '../utils/util'
 import ArticleCard from './ArticleCard';
+import Loader from './Loader'
 
 class ArticleList extends Component {
     state = {
-        articles: []
-
+        articles: [],
+        isLoaded: false
     }
 
     componentDidMount() {
         api.getAllArticles().then(articles => {
-            this.setState({articles})
+            this.setState({articles, isLoaded:true})
         })
     }
 
     render() {
-        const {articles} = this.state
+        const {articles, isLoaded} = this.state
+        if(!isLoaded) return <Loader/>
         return (
             <section>
                 {articles.map(article => {
