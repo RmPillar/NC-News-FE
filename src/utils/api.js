@@ -20,3 +20,15 @@ exports.getAllArticles = query => {
       return data.articles;
     });
 };
+
+exports.getArticleById = id => {
+  return axios.get(`${baseURL}/articles/${id}`).then(({ data }) => {
+    return data.article;
+  });
+};
+
+exports.getCommentsByArticleId = id => {
+  return axios.get(`${baseURL}/articles/${id}/comments`).then(({ data }) => {
+    return data.comments;
+  });
+};
