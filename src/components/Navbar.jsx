@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from '@reach/router'
 import * as api from '../utils/util'
 
 class Navbar extends Component {
@@ -20,12 +21,14 @@ class Navbar extends Component {
         const {topics} = this.state
         return (
             <nav>
+                <Link to='/'><button>Home</button></Link>
                 {topics.map(topic => {
-                    return <button key={topic.slug}>{topic.slug}</button>
+                    return <Link to ={`/topics/${topic.slug}`}key={topic.slug}>
+                        <button >{topic.slug}</button>
+                    </Link>
                 })}
             </nav>
-                
-            
+
         );
     }
 }
