@@ -5,6 +5,7 @@ import ArticleCard from './ArticleCard';
 class ArticleList extends Component {
     state = {
         articles: []
+
     }
 
     componentDidMount() {
@@ -16,11 +17,11 @@ class ArticleList extends Component {
     render() {
         const {articles} = this.state
         return (
-            <main>
+            <section>
                 {articles.map(article => {
                     return <ArticleCard key={article.article_id} articleData={article}/>
                 })}
-            </main>
+            </section>
         );
     }
 }
