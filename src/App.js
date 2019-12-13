@@ -7,11 +7,11 @@ import ArticleList from './components/ArticleList';
 class App extends Component {
   render() {
     return (
-      <div>
+      <main className='App'>
         <Header />
         <Navbar />
         <ArticleList />
-      </div>
+      </main>
     );
   }
 }
