@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from '@reach/router'
+import Button from './Button'
 import * as api from '../utils/api'
 
 class Navbar extends Component {
@@ -20,10 +21,10 @@ class Navbar extends Component {
         const {topics} = this.state
         return (
             <nav>
-                <Link to='/'><button>Home</button></Link>
-                {topics.map(({slug}) => {
-                    return <Link to ={`/${slug}`} key={slug}>
-                        <button>{slug}</button>
+                <Link to='/'><Button>Home</Button></Link>
+                {topics.map((topic) => {
+                    return <Link to ={`/${topic}`.toLowerCase()} key={topic}>
+                        <Button>{topic}</Button>
                     </Link>
                 })}
             </nav>
