@@ -9,7 +9,6 @@ exports.getAllTopics = () => {
 };
 
 exports.getAllArticles = query => {
-  console.log(query);
   return axios
     .get(`${baseURL}/articles`, {
       params: {
