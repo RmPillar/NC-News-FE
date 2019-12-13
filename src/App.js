@@ -11,9 +11,9 @@ class App extends Component {
       <main className='App'>
         <Header />
         <Router>
-          <ArticleList path='/' />
-          <ArticleList path='/:topicSlug' />
-          <SingleArticle path='/article/:article_id' />
+          <ArticleList path='/articles/*' />
+          <ArticleList path='/:topicSlug/*' />
+          <SingleArticle path='/article/:article_id/' />
         </Router>
       </main>
     );
