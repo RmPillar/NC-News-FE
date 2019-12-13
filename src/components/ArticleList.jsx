@@ -12,6 +12,12 @@ class ArticleList extends Component {
         isLoaded: false
     }
 
+    Section = styled.section`
+        display:flex;
+        flex-direction:column;
+        align-items:center
+    `
+
     componentDidMount() {
         api.getAllArticles().then(articles => {
             this.setState({articles, isLoaded:true})
@@ -26,11 +32,7 @@ class ArticleList extends Component {
         }
     }
 
-    Section = styled.section`
-        display:flex;
-        flex-direction:column;
-        align-items:center
-    `
+
 
     render() {
         const {articles, isLoaded} = this.state

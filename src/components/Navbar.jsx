@@ -10,6 +10,17 @@ class Navbar extends Component {
         topics: []
     }
 
+    Nav = styled.nav`
+        display: inline-block;
+        padding: 0.5rem 0;
+        margin: 0.5rem 1rem;
+        width: 90vw;
+        background: transparent;
+        color: black;
+        border: 2px solid black;
+        font-family: 'Montserrat', sans-serif;
+    `
+
     componentDidMount() {
         api.getAllTopics().then(topics => {
             this.setState(() => {
@@ -17,17 +28,6 @@ class Navbar extends Component {
             })
         })
     }
-
-    Nav = styled.nav`
-        display: inline-block;
-        padding: 0.5rem 0;
-        margin: 0.5rem 1rem;
-        width: 20vw;
-        background: transparent;
-        color: black;
-        border: 2px solid black;
-        font-family: 'Montserrat', sans-serif;
-    `
 
     render() {
         const {topics} = this.state
