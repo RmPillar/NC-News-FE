@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router } from '@reach/router';
 import './App.css';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
@@ -10,7 +11,9 @@ class App extends Component {
       <main className='App'>
         <Header />
         <Navbar />
-        <ArticleList />
+        <Router>
+          <ArticleList path='/' />
+        </Router>
       </main>
     );
   }
