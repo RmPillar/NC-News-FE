@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Router} from '@reach/router'
+import styled from 'styled-components'
 import * as api from '../utils/api'
 import ArticleCard from './ArticleCard';
 import Loader from './Loader'
@@ -25,18 +26,24 @@ class ArticleList extends Component {
         }
     }
 
+    Section = styled.section`
+        display:flex;
+        flex-direction:column;
+        align-items:center
+    `
+
     render() {
         const {articles, isLoaded} = this.state
         if(!isLoaded) return <Loader/>
         return (
-            <section>
+            <this.Section>
                 <Router>
                     <SingleArticle path='articles/:article_id'/>
                 </Router>
                 {articles.map(article => {
                     return <ArticleCard key={article.article_id} articleData={article}/>
                 })}
-            </section>
+            </this.Section>
         );
     }
 }
