@@ -16,8 +16,8 @@ class ArticleList extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if(prevProps['*'] !== this.props['*']) {
-            api.getAllArticles(this.props['*']).then(articles => {
+        if(prevProps.topicSlug !== this.props.topicSlug) {
+            api.getAllArticles(this.props.topicSlug).then(articles => {
                 this.setState({articles, isLoaded:true})
             })
         }
