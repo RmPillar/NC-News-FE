@@ -1,10 +1,13 @@
 import React from 'react';
+import {Link} from '@reach/router'
 
-const ArticleCard = ({articleData:{title,author,topic,created_at,votes,comment_count}}) => {
-    
+const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,votes,comment_count}}) => {
     return (
         <article>
-            <h4>{title}</h4>
+
+            <Link id='name' to={`article/${article_id}`}>
+                <h4>{title}</h4>
+            </Link>
             <h6>{author}</h6>
             <p>{topic}</p>
             <p>Posted At: {created_at}</p>
