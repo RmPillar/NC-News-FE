@@ -8,8 +8,15 @@ exports.getAllTopics = () => {
   });
 };
 
-exports.getAllArticles = () => {
-  return axios.get(`${baseURL}/articles`).then(({ data }) => {
-    return data.articles;
-  });
+exports.getAllArticles = query => {
+  console.log(query);
+  return axios
+    .get(`${baseURL}/articles`, {
+      params: {
+        topic: query
+      }
+    })
+    .then(({ data }) => {
+      return data.articles;
+    });
 };

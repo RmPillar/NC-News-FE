@@ -15,6 +15,14 @@ class ArticleList extends Component {
         })
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps['*'] !== this.props['*']) {
+            api.getAllArticles(this.props['*']).then(articles => {
+                this.setState({articles, isLoaded:true})
+            })
+        }
+    }
+
     render() {
         const {articles, isLoaded} = this.state
         if(!isLoaded) return <Loader/>
