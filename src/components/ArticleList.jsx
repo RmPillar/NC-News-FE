@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import * as api from '../utils/util'
+import {Router} from '@reach/router'
+import * as api from '../utils/api'
 import ArticleCard from './ArticleCard';
 import Loader from './Loader'
+import SingleArticle from './SingleArticle';
 
 class ArticleList extends Component {
     state = {
@@ -28,6 +30,9 @@ class ArticleList extends Component {
         if(!isLoaded) return <Loader/>
         return (
             <section>
+                <Router>
+                    <SingleArticle path='articles/:article_id'/>
+                </Router>
                 {articles.map(article => {
                     return <ArticleCard key={article.article_id} articleData={article}/>
                 })}
