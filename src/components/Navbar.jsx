@@ -21,9 +21,9 @@ class Navbar extends Component {
         return (
             <nav>
                 <Link to='/'><button>Home</button></Link>
-                {topics.map(topic => {
-                    return <Link to ={`/${topic.slug}`}key={topic.slug}>
-                        <button >{topic.slug}</button>
+                {topics.map(({slug}) => {
+                    return <Link to ={`/${slug}`} key={slug}>
+                        <button>{slug}</button>
                     </Link>
                 })}
             </nav>
