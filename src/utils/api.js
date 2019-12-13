@@ -4,7 +4,9 @@ const baseURL = 'https://nc-news-rpillar.herokuapp.com/api';
 
 exports.getAllTopics = () => {
   return axios.get(`${baseURL}/topics`).then(({ data }) => {
-    return data.topics;
+    return data.topics.map(({ slug }) => {
+      return slug.slice(0, 1).toUpperCase() + slug.slice(1);
+    });
   });
 };
 
