@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from '@reach/router'
+import styled from 'styled-components'
 import Button from './Button'
 import * as api from '../utils/api'
 
@@ -17,17 +18,28 @@ class Navbar extends Component {
         })
     }
 
+    Nav = styled.nav`
+        display: inline-block;
+        padding: 0.5rem 0;
+        margin: 0.5rem 1rem;
+        width: 20vw;
+        background: transparent;
+        color: black;
+        border: 2px solid black;
+        font-family: 'Montserrat', sans-serif;
+    `
+
     render() {
         const {topics} = this.state
         return (
-            <nav>
+            <this.Nav>
                 <Link to='/'><Button>Home</Button></Link>
                 {topics.map((topic) => {
                     return <Link to ={`/${topic}`.toLowerCase()} key={topic}>
                         <Button>{topic}</Button>
                     </Link>
                 })}
-            </nav>
+            </this.Nav>
 
         );
     }
