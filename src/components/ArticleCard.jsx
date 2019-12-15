@@ -47,7 +47,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         <Article>
             <section id='main'>
                 <Link id='name' to={`articles/${article_id}`}>
-                    <H4>{title.length < 40 ? title : title.slice(0,50)+'...'}</H4>
+                    <H4>{title.length < 40 ? title : title.slice(0,40)+'...'}</H4>
                 </Link>
                 <P>{author}</P>
                 <P>{topic}</P>
