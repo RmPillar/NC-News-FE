@@ -13,9 +13,7 @@ exports.getAllTopics = () => {
 exports.getAllArticles = query => {
   return axios
     .get(`${baseURL}/articles`, {
-      params: {
-        topic: query
-      }
+      params: query
     })
     .then(({ data }) => {
       return data.articles;

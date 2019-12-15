@@ -5,11 +5,14 @@ import * as api from '../utils/api'
 import ArticleCard from './ArticleCard';
 import Loader from './Loader'
 import SingleArticle from './SingleArticle';
+import { Button } from '@material-ui/core';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 class ArticleList extends Component {
     state = {
         articles: [],
-        isLoaded: false
+        isLoaded: false,
+        page:1
     }
 
     Section = styled.section`
@@ -24,15 +27,24 @@ class ArticleList extends Component {
         })
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps,prevState) {
         if(prevProps.topicSlug !== this.props.topicSlug) {
-            api.getAllArticles(this.props.topicSlug).then(articles => {
+            api.getAllArticles({topic:this.props.topicSlug}).then(articles => {
+                this.setState({articles, isLoaded:true})
+            })
+        } else if (prevState.page !== this.state.page) {
+            api.getAllArticles({p:this.state.page}).then(articles=> {
                 this.setState({articles, isLoaded:true})
             })
         }
     }
 
-
+    clickHandler = event => {
+        this.setState(currentState => {
+          return { page: currentState.page + 1, isLoaded: false };
+        });
+      };
+    
 
     render() {
         const {articles, isLoaded} = this.state
@@ -46,6 +58,13 @@ class ArticleList extends Component {
                 {articles.map((article, index) => {
                     return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]}/>
                 })}
+                <Button
+                    variant='outlined'
+                    startIcon={<NavigateNextIcon />}
+                    onClick={this.clickHandler}
+                >
+                    Next
+                </Button>
             </this.Section>
         );
     }
