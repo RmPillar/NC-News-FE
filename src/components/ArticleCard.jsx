@@ -11,7 +11,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         border-radius: 10px;
         color: whitesmoke;
         background: ${`#${color}`};
-        width: 40vw;
+        width: 30vw;
         height: 200px;
         border: 2px whitesmoke;
         font-family: 'Roboto', sans-serif;
