@@ -9,11 +9,11 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         padding: 0.5rem 0;
         margin: 0.5rem 1rem;
         border-radius: 10px;
-        color: whitesmoke;
-        background: ${`#${color}`};
+        color: #3e3e3e;
+        background: transparent;
         width: 30vw;
         height: 200px;
-        border: 2px whitesmoke;
+        border: 2px solid ${`#${color}`};
         font-family: 'Roboto', sans-serif;
         display:grid;
         grid-template-columns: 3fr 1fr
@@ -27,14 +27,14 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         width: 5rem;
         background: transparent;
         color: #FCFCFC;
-        border: 3px solid #FCFCFC;
+        border: 2px solid ${`#${color}`};
         border-radius: 10px;
         font-family: 'Roboto', sans-serif;
         font-size: 10px;
     `
 
-    const H5 = styled.h5`
-    color:white;
+    const H4 = styled.h4`
+    color:#3e3e3e;
         &:hover {
             text-decoration: underline; 
         };
@@ -50,7 +50,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         <Article>
             <section id='main'>
                 <Link id='name' to={`articles/${article_id}`}>
-                    <H5>{title}</H5>
+                    <H4>{title}</H4>
                 </Link>
                 <P>{author}</P>
                 <P>{topic}</P>
