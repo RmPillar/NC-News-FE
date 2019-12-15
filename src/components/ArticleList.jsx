@@ -36,14 +36,15 @@ class ArticleList extends Component {
 
     render() {
         const {articles, isLoaded} = this.state
+        const colors = ['A19AD1', '8FC2DF','C2E0AE','EFEFA8','EDCB9C','D99CA5']
         if(!isLoaded) return <Loader/>
         return (
             <this.Section>
                 <Router>
                     <SingleArticle path='articles/:article_id'/>
                 </Router>
-                {articles.map(article => {
-                    return <ArticleCard key={article.article_id} articleData={article}/>
+                {articles.map((article, index) => {
+                    return <ArticleCard key={article.article_id} articleData={article} color={colors[index%6]}/>
                 })}
             </this.Section>
         );
