@@ -6,10 +6,13 @@ import ArticleList from './components/ArticleList';
 import SingleArticle from './components/SingleArticle';
 
 class App extends Component {
+  state = {
+    user: 'jessjelly'
+  };
   render() {
     return (
       <main className='App'>
-        <Header />
+        <Header user={this.state.user} />
         <Router>
           <ArticleList path='/articles/*' />
           <ArticleList path='/:topicSlug/*' />
