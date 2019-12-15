@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components'
-import Navbar from './Navbar';
 
 
 const Header = ({user}) => {
@@ -26,7 +25,6 @@ const Header = ({user}) => {
     `
     const H3 = styled.h3`
         color:#FCFCFC;
-
         margin: 0px 10px 0px 0px;
     `
 
