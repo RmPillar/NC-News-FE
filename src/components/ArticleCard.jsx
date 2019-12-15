@@ -15,9 +15,9 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         height: 200px;
         border: 2px whitesmoke;
         font-family: 'Roboto', sans-serif;
-        display:flex;
-        align-items: center;
-        justify-content: space-between;
+        display:grid;
+        grid-template-columns: 3fr 1fr
+        grid-areas: main buttons;
     `
 
     const Button = styled.button`
@@ -38,20 +38,26 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         &:hover {
             text-decoration: underline; 
         };
+        margin: 10px 0px 10px 0px;
     `
 
+    const P = styled.p`
+        margin:3px 0px 3px 0px;
+    `
 
 
     return (
         <Article>
-            <Link id='name' to={`articles/${article_id}`}>
-                <H5>{title}</H5>
-            </Link>
-            <h6>{author}</h6>
-            <p>{topic}</p>
-            <p>Posted At: {created_at}</p>
-            <p>Votes: {votes}</p>
-            <p>Comments: {comment_count}</p>
+            <section id='main'>
+                <Link id='name' to={`articles/${article_id}`}>
+                    <H5>{title}</H5>
+                </Link>
+                <P>{author}</P>
+                <P>{topic}</P>
+                <P>Posted At: {created_at}</P>
+                <P>Votes: {votes}</P>
+                <P>Comments: {comment_count}</P>
+            </section>
             <section id='buttons'>
                 <Button><img src='/like.png'/></Button>
                 <Button><img src='/dislike.png'/></Button>
