@@ -1,6 +1,10 @@
 import React from 'react';
 import {Link} from '@reach/router'
 import styled from 'styled-components'
+import { Button } from '@material-ui/core';
+import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 
 const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,votes,comment_count},color}) => {
@@ -20,19 +24,6 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         grid-areas: main buttons;
     `
 
-    const Button = styled.button`
-        display: inline-block;
-        padding: 0.5rem 0;
-        margin: 0.4rem 1rem;
-        width: 5rem;
-        background: transparent;
-        color: #FCFCFC;
-        border: 2px solid ${`#${color}`};
-        border-radius: 10px;
-        font-family: 'Roboto', sans-serif;
-        font-size: 10px;
-    `
-
     const H4 = styled.h4`
     color:#3e3e3e;
         &:hover {
@@ -45,12 +36,18 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         margin:3px 0px 3px 0px;
     `
 
+      const style = {
+          color: `#${color}`,
+          border: `2px solid #${color}`, 
+          margin: '5px'
+      }
+      console.log(title.length)
 
     return (
         <Article>
             <section id='main'>
                 <Link id='name' to={`articles/${article_id}`}>
-                    <H4>{title}</H4>
+                    <H4>{title.length < 50 ? title : title.slice(0,50)+'...'}</H4>
                 </Link>
                 <P>{author}</P>
                 <P>{topic}</P>
@@ -59,9 +56,15 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
                 <P>Comments: {comment_count}</P>
             </section>
             <section id='buttons'>
-                <Button><img src='/like.png'/></Button>
-                <Button><img src='/dislike.png'/></Button>
-                <Button><img src='/comment.png'/></Button>
+                <Button variant='outlined' style={style}  startIcon={<ThumbUpAltIcon />} disableElevation>
+                    Like
+                </Button>
+                <Button variant='outlined' style={style} startIcon={<ThumbDownAltIcon />}>
+                    Dislike
+                </Button>
+                <Button variant='outlined' style={style} startIcon={<ChatBubbleIcon/>}>
+                    Comment
+                </Button>
             </section>
         </Article>
     );
