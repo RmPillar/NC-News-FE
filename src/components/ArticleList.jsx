@@ -29,10 +29,12 @@ class ArticleList extends Component {
 
     componentDidUpdate(prevProps,prevState) {
         if(prevProps.topicSlug !== this.props.topicSlug) {
+            window.scrollTo(0, 0)
             api.getAllArticles({topic:this.props.topicSlug}).then(articles => {
                 this.setState({articles, isLoaded:true})
             })
         } else if (prevState.page !== this.state.page) {
+            window.scrollTo(0, 0)
             api.getAllArticles({p:this.state.page}).then(articles=> {
                 this.setState({articles, isLoaded:true})
             })
