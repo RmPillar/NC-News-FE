@@ -16,6 +16,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         color: #3e3e3e;
         background: transparent;
         width: 30vw;
+        min-width: 380px;
         height: 200px;
         border: 2px solid ${`#${color}`};
         font-family: 'Roboto', sans-serif;
@@ -41,7 +42,6 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
           border: `2px solid #${color}`, 
           margin: '5px'
       }
-      console.log(title.length)
 
     return (
         <Article>
