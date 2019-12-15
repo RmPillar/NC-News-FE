@@ -15,8 +15,8 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         border-radius: 10px;
         color: #3e3e3e;
         background: transparent;
-        width: 30vw;
-        min-width: 380px;
+        width: 35vw;
+        min-width: 300px;
         height: 200px;
         border: 2px solid ${`#${color}`};
         font-family: 'Roboto', sans-serif;
@@ -47,7 +47,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         <Article>
             <section id='main'>
                 <Link id='name' to={`articles/${article_id}`}>
-                    <H4>{title.length < 50 ? title : title.slice(0,50)+'...'}</H4>
+                    <H4>{title.length < 40 ? title : title.slice(0,50)+'...'}</H4>
                 </Link>
                 <P>{author}</P>
                 <P>{topic}</P>
