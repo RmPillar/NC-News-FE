@@ -40,8 +40,9 @@ class ArticleList extends Component {
     }
 
     clickHandler = event => {
+        const direction = event.target.innerText === 'NEXT' ? 1 : event.target.innerText === 'PREVIOUS' ? -1 : 0
         this.setState(currentState => {
-          return { page: currentState.page + 1, isLoaded: false };
+          return { page: currentState.page + direction, isLoaded: false };
         });
       };
     
@@ -58,6 +59,13 @@ class ArticleList extends Component {
                 {articles.map((article, index) => {
                     return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]}/>
                 })}
+                {this.state.page > 1 &&  <Button
+                    variant='outlined'
+                    startIcon={<NavigateNextIcon />}
+                    onClick={this.clickHandler}
+                >
+                    Previous
+                </Button>}
                 <Button
                     variant='outlined'
                     startIcon={<NavigateNextIcon />}
