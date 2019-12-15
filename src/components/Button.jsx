@@ -8,6 +8,6 @@ width: 11rem;
 background: transparent;
 color: black;
 border: 2px solid black;
-font-family: 'Montserrat', sans-serif;
+font-family: 'Roboto', sans-serif;
 `
 export default Button;

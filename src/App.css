@@ -1,10 +1,10 @@
 .App {
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 html {
-  background-color: whitesmoke
+  background-color: #FCFCFC
 }
 
 a {
@@ -19,9 +19,11 @@ a {
 #info{
   display:flex;
   flex-direction: column;
-  border: 3px solid white;
+  border: 3px solid #FCFCFC;
   border-radius: 10px;
   padding: 10px;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
 }
 
 #buttons{

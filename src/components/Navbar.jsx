@@ -18,7 +18,7 @@ class Navbar extends Component {
         background: transparent;
         color: black;
         border: 2px solid black;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Roboto', sans-serif;
     `
 
     componentDidMount() {

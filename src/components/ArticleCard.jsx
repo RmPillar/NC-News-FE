@@ -11,10 +11,10 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         border-radius: 10px;
         color: whitesmoke;
         background: ${`#${color}`};
-        width: 70vw;
+        width: 40vw;
         height: 200px;
         border: 2px whitesmoke;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Roboto', sans-serif;
         display:flex;
         align-items: center;
         justify-content: space-between;
@@ -23,18 +23,18 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
     const Button = styled.button`
         display: inline-block;
         padding: 0.5rem 0;
-        margin: 0.5rem 1rem;
+        margin: 0.4rem 1rem;
         width: 5rem;
-        background: whitesmoke;
-        color: black;
-        border: 2px solid whitesmoke;
+        background: transparent;
+        color: #FCFCFC;
+        border: 3px solid #FCFCFC;
         border-radius: 10px;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Roboto', sans-serif;
+        font-size: 10px;
     `
 
     const H5 = styled.h5`
     color:white;
-        text-decoration: linethrough
         &:hover {
             text-decoration: underline; 
         };
@@ -44,22 +44,18 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
 
     return (
         <Article>
-            <section id='title'>
-                <Link id='name' to={`articles/${article_id}`}>
-                    <H5>{title}</H5>
-                </Link>
-                <h6>{author}</h6>
-                <p>{topic}</p>
-            </section>
-            <section id='info'>
-                <p>Posted At: {created_at}</p>
-                <p>Votes: {votes}</p>
-                <p>Comments: {comment_count}</p>
-            </section>
+            <Link id='name' to={`articles/${article_id}`}>
+                <H5>{title}</H5>
+            </Link>
+            <h6>{author}</h6>
+            <p>{topic}</p>
+            <p>Posted At: {created_at}</p>
+            <p>Votes: {votes}</p>
+            <p>Comments: {comment_count}</p>
             <section id='buttons'>
-                <Button>+</Button>
-                <Button>-</Button>
-                <Button>Comment</Button>
+                <Button><img src='/like.png'/></Button>
+                <Button><img src='/dislike.png'/></Button>
+                <Button><img src='/comment.png'/></Button>
             </section>
         </Article>
     );
