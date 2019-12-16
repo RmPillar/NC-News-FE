@@ -26,7 +26,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
     `
 
     const H4 = styled.h4`
-    color:#3e3e3e;
+        color:#3e3e3e;
         &:hover {
             text-decoration: underline; 
         };
@@ -49,11 +49,10 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
                 <Link id='name' to={`${article_id}`}>
                     <H4>{title.length < 40 ? title : title.slice(0,40)+'...'}</H4>
                 </Link>
-                <P>{author}</P>
-                <P>{topic}</P>
+                <P>{`Created By: ${author}`}</P>
+                <P>{`Topic: ${topic}`}</P>
                 <P>Posted At: {created_at}</P>
-                <P>Votes: {votes}</P>
-                <P>Comments: {comment_count}</P>
+                <P>{`Votes: ${votes} Comments: ${comment_count}`}</P>
             </section>
             <section id='buttons'>
                 <Button variant='outlined' style={style}  startIcon={<ThumbUpAltIcon />} disableElevation>
@@ -62,9 +61,9 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
                 <Button variant='outlined' style={style} startIcon={<ThumbDownAltIcon />}>
                     Dislike
                 </Button>
-                <Button variant='outlined' style={style} startIcon={<ChatBubbleIcon/>}>
+                {/* <Button variant='outlined' style={style} startIcon={<ChatBubbleIcon/>}>
                     Comment
-                </Button>
+                </Button> */}
             </section>
         </Article>
     );
