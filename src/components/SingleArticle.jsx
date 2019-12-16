@@ -29,6 +29,13 @@ class SingleArticle extends Component {
         font-family: 'Roboto', sans-serif;
     `
 
+    Section = styled.section`
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+    `
+
     componentDidMount() {
         return this.fetchArticleById(this.props.article_id)
     }
@@ -81,7 +88,7 @@ class SingleArticle extends Component {
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay err={err}/>
         return (
-            <section >
+           <section>
                 <this.Article>
                     <h3>{title}</h3>
                     <h5>{author}</h5>
@@ -100,16 +107,18 @@ class SingleArticle extends Component {
                         <button>Submit</button>
                     </label>
                 </form>}
+                <this.Section >
                 {this.state.viewComments && this.state.comments.map((comment,index) => {
-                        return <CommentCard 
-                            key={comment.comment_id} 
-                            comment={comment} 
-                            color={this.props.colors[index%4]} 
-                            user={this.props.user} 
-                            article_id={this.props.article_id}
-                        />
+                    return <CommentCard 
+                        key={comment.comment_id} 
+                        comment={comment} 
+                        color={this.props.colors[index%4]} 
+                        user={this.props.user} 
+                        article_id={this.props.article_id}
+                    />
                 })}
-            </section>
+            </this.Section>
+           </section>
         );
     }
 }

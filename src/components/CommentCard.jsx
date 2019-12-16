@@ -16,7 +16,7 @@ class CommentCard extends Component {
         background: transparent;
         width: 35vw;
         min-width: 300px;
-        height: 200px;
+        height: auto;
         border: 2px solid #${this.props.color};
         font-family: 'Roboto', sans-serif;
     `
