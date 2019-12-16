@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import * as api from '../utils/api'
+import styled from 'styled-components'
+import { Button, TextField } from '@material-ui/core';
+import moment from 'moment'
 import Loader from './Loader';
 import CommentCard from './CommentCard'
-import styled from 'styled-components'
 import ErrorDisplay from './ErrorDisplay';
-import moment from 'moment'
+import * as api from '../utils/api'
 
 class SingleArticle extends Component {
     state = {
@@ -44,6 +45,12 @@ class SingleArticle extends Component {
         justify-content:space-around;
     `
 
+    style = {
+        color: `#26547C`,
+        border: `2px solid #26547C`, 
+        margin: '5px'
+    }
+
     componentDidMount() {
         return this.fetchArticleById(this.props.article_id)
     }
@@ -63,9 +70,9 @@ class SingleArticle extends Component {
         })
     }
     
-    handleClick = ({target}) => {
+    handleClick = ({currentTarget}) => {
         this.setState((currentState) => {
-            return target.name === 'view' ? {viewComments:!currentState.viewComments} : target.name === 'create' ? {createComment:!currentState.createComment} : {}
+            return currentTarget.name === 'view' ? {viewComments:!currentState.viewComments} : currentTarget.name === 'create' ? {createComment:!currentState.createComment} : {}
         })
     }
 
@@ -77,9 +84,9 @@ class SingleArticle extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        return api.postComment(this.props.article_id,this.props.user,event.target[0].value)
+        console.log(event)
+        return api.postComment(this.props.article_id,this.props.user,event.currentTarget[0].value)
         .then(response => {
-            console.log(response)
             this.setState((currentState) => {
                 return {
                     viewComments: true,
@@ -110,15 +117,16 @@ class SingleArticle extends Component {
                         <p>Comments: {comment_count}</p> 
                     </this.Info>
                 </this.Article>
-                <button name='view' onClick={this.handleClick}>View Comments</button>
-                <button name='create' onClick={this.handleClick}>Comment</button>
-                {this.state.createComment && <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Comment:
-                        <textarea row='1' cols='50' onChange={this.handleChange} value={this.state.newComment}></textarea>
-                        <button disabled={!this.state.newComment}>Submit</button>
-                    </label>
-                </form>}
+                <Button variant='outlined' style={this.style} name='view' onClick={this.handleClick}>View Comments</Button>
+                <Button variant='outlined' style={this.style} name='create' onClick={this.handleClick}>Comment</Button>
+                <this.Info>
+                    {this.state.createComment && <form onSubmit={this.handleSubmit}>
+                       
+                            <TextField error={!this.state.newComment} variant='outlined' placeholder='Comment' onChange={this.handleChange} value={this.state.newComment}></TextField>
+                            <Button variant='outlined' style={this.style} disabled={!this.state.newComment} type='submit'>Submit</Button>
+                        
+                    </form>}
+                </this.Info>
                 <this.Section >
                 {this.state.viewComments && this.state.comments.map((comment,index) => {
                     return <CommentCard 
