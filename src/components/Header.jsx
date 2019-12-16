@@ -17,6 +17,7 @@ const Header = ({user}) => {
         background: #26547C;
         color: black;
         font-family: 'Roboto', sans-serif;
+        z-index:1
     `
 
     const H1 = styled.h1`
