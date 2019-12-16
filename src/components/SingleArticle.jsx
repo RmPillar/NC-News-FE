@@ -10,7 +10,8 @@ class SingleArticle extends Component {
         article: {},
         comments:[],
         isLoaded:false,
-        err:''
+        err:'',
+        viewComments: false
     }
 
     Article = styled.article`
@@ -33,7 +34,8 @@ class SingleArticle extends Component {
     componentDidUpdate(prevProps) {
         if(this.props.article_id !== prevProps.article_id) {
             return this.fetchArticleById(this.props.article_id)
-    }}
+        }
+    }
 
     fetchArticleById = id => {
         return Promise.all([api.getArticleById(id), api.getCommentsByArticleId(id)])
@@ -42,8 +44,11 @@ class SingleArticle extends Component {
         }).catch(({response:{data:{msg}}}) => {
             this.setState({err:msg,isLoaded:true})
         })
-        }
+    }
     
+    clickHandler = (currentState) => {
+        this.setState({viewComments:!currentState.viewComments})
+    }
 
     render() {
         const {isLoaded,err, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
@@ -58,11 +63,11 @@ class SingleArticle extends Component {
                     <p>{body}</p>
                     <p>Posted At: {created_at}</p>
                     <p>Votes: {votes}</p>
-                    <p>Comments: {comment_count}</p>
-                    
+                    <p>Comments: {comment_count}</p> 
                 </this.Article>
-                {this.state.comments.map(comment => {
-                        return <CommentCard key={comment.comment_id} comment={comment}/>
+                <button onClick={this.clickHandler}>View Comments</button>
+                {this.state.viewComments && this.state.comments.map((comment,index) => {
+                        return <CommentCard key={comment.comment_id} comment={comment} color={this.props.colors[index%4]}/>
                 })}
             </section>
         );

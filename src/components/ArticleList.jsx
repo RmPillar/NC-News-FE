@@ -60,7 +60,7 @@ class ArticleList extends Component {
         return (
             <this.Section>
                 <Router>
-                    <SingleArticle path=':article_id'/>
+                    <SingleArticle path=':article_id' colors={colors}/>
                 </Router>
                 <article>
                     {articles.map((article, index) => {

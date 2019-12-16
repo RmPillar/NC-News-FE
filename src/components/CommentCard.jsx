@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 
-const CommentCard = ({comment}) => {
+const CommentCard = ({comment,color}) => {
 
     const Section = styled.section`
         padding: 0.5rem 0;
@@ -12,11 +12,9 @@ const CommentCard = ({comment}) => {
         width: 35vw;
         min-width: 300px;
         height: 200px;
-        border: 2px solid #26547C;
+        border: 2px solid #${color};
         font-family: 'Roboto', sans-serif;
     `
-
-
 
     return (
         <Section>
