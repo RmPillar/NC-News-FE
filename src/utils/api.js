@@ -37,3 +37,8 @@ export const postComment = async (id, username, body) => {
   });
   return newComment;
 };
+
+export const deleteComment = async comment_id => {
+  const deletedComment = await instance.delete(`comments/${comment_id}`);
+  return deletedComment;
+};

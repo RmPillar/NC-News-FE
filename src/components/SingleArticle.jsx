@@ -101,7 +101,13 @@ class SingleArticle extends Component {
                     </label>
                 </form>}
                 {this.state.viewComments && this.state.comments.map((comment,index) => {
-                        return <CommentCard key={comment.comment_id} comment={comment} color={this.props.colors[index%4]}/>
+                        return <CommentCard 
+                            key={comment.comment_id} 
+                            comment={comment} 
+                            color={this.props.colors[index%4]} 
+                            user={this.props.user} 
+                            article_id={this.props.article_id}
+                        />
                 })}
             </section>
         );
