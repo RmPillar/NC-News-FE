@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Button } from '@material-ui/core';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import moment from 'moment'
 
 
 const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,votes,comment_count},color}) => {
@@ -42,7 +42,6 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
           border: `2px solid #${color}`, 
           margin: '5px'
       }
-
     return (
         <Article>
             <section id='main'>
@@ -51,7 +50,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
                 </Link>
                 <P>{`Created By: ${author}`}</P>
                 <P>{`Topic: ${topic}`}</P>
-                <P>Posted At: {created_at}</P>
+                <P>Posted At: {moment(created_at).format("LT L")}</P>
                 <P>{`Votes: ${votes} Comments: ${comment_count}`}</P>
             </section>
             <section id='buttons'>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
+import moment from 'moment'
 import * as api from '../utils/api'
 
 class CommentCard extends Component {
@@ -35,7 +36,7 @@ class CommentCard extends Component {
             <this.Section>
                 <p>{comment.author}</p>
                 <p>{comment.body}</p>
-                <p>{comment.created_at}</p>
+                <p>Posted At: {moment(comment.created_at).format("LT L")}</p>
                 <p>{comment.votes}</p>
                 {user===comment.author && <button value={comment.comment_id}onClick={this.handleClick}>Delete</button>}
             </this.Section>

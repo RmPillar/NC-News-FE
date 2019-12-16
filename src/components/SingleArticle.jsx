@@ -4,6 +4,7 @@ import Loader from './Loader';
 import CommentCard from './CommentCard'
 import styled from 'styled-components'
 import ErrorDisplay from './ErrorDisplay';
+import moment from 'moment'
 
 class SingleArticle extends Component {
     state = {
@@ -94,7 +95,7 @@ class SingleArticle extends Component {
                     <h5>{author}</h5>
                     <p>{topic}</p>
                     <p>{body}</p>
-                    <p>Posted At: {created_at}</p>
+                    <p>Posted At: {moment(created_at).format("LT l")}</p>
                     <p>Votes: {votes}</p>
                     <p>Comments: {comment_count}</p> 
                 </this.Article>
