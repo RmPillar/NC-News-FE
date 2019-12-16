@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components'
+import {Link} from '@reach/router'
 
 
 const Header = ({user}) => {
-    const Nav = styled.nav`
+    const Header = styled.header`
         position: -webkit-sticky;
         position: sticky;
         top: 0;
@@ -29,10 +30,12 @@ const Header = ({user}) => {
     `
 
     return (
-        <Nav>
-            <H1>NC NEWS</H1>
+        <Header>
+            <Link to='/articles'>
+                <H1>NC NEWS</H1>
+            </Link>
             <H3>Welcome: {user}</H3>
-        </Nav>
+        </Header>
     );
 };
 
