@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Router,Navigate} from '@reach/router'
+import {Router} from '@reach/router'
 import styled from 'styled-components'
 import * as api from '../utils/api'
 import ArticleCard from './ArticleCard';
@@ -54,7 +54,6 @@ class ArticleList extends Component {
         event.preventDefault()
         this.setState({isLoaded:false})
         this.getArticles()
-        
     }
 
     getArticles = () => {
