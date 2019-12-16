@@ -33,7 +33,6 @@ class Navbar extends Component {
         const {topics} = this.state
         return (
             <this.Nav>
-                <Link to='/'><Button>Home</Button></Link>
                 {topics.map(({slug}) => {
                     return <Link to ={`topic/${slug}`.toLowerCase()} key={slug}>
                         <Button>{slug}</Button>
