@@ -7,12 +7,14 @@ import Loader from './Loader'
 import SingleArticle from './SingleArticle';
 import { Button } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import ErrorDisplay from './ErrorDisplay';
 
 class ArticleList extends Component {
     state = {
         articles: [],
         isLoaded: false,
-        page:1
+        page:1,
+        err: ''
     }
 
     Section = styled.section`
@@ -27,6 +29,8 @@ class ArticleList extends Component {
     componentDidMount() {
         api.getAllArticles(this.props,this.state.page).then(articles => {
             this.setState({articles, isLoaded:true})
+        }).catch(({response:{data:{msg}}}) => {
+            this.setState({err:msg,isLoaded:true})
         })
     }
 
@@ -35,6 +39,8 @@ class ArticleList extends Component {
             window.scrollTo(0, 0)
             api.getAllArticles(this.props,this.state.page).then(articles => {
                 this.setState({articles, isLoaded:true})
+            }).catch(({response:{data:{msg}}}) => {
+                this.setState({err:msg,isLoaded:true})
             })
     }}
 
@@ -47,9 +53,10 @@ class ArticleList extends Component {
     
 
     render() {
-        const {articles, isLoaded} = this.state
+        const {articles, isLoaded, err} = this.state
         const colors = ['26547C','EF476F','FFD166','06D6A0']
         if(!isLoaded) return <Loader/>
+        if(err) return <ErrorDisplay/>
         return (
             <this.Section>
                 <Router>
