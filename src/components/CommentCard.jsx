@@ -34,10 +34,10 @@ class CommentCard extends Component {
         if(this.state.isDeleted) return <h3>Your comment has been deleted</h3>
         return (
             <this.Section>
-                <p>{comment.author}</p>
+                <h5>{comment.author}</h5>
                 <p>{comment.body}</p>
                 <p>Posted At: {moment(comment.created_at).format("LT L")}</p>
-                <p>{comment.votes}</p>
+                <p>Votes: {comment.votes}</p>
                 {user===comment.author && <button value={comment.comment_id}onClick={this.handleClick}>Delete</button>}
             </this.Section>
         );
