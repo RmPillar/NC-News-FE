@@ -20,11 +20,11 @@ export const getAllArticles = async ({ topicSlug }, page) => {
 };
 
 export const getArticleById = async id => {
-  const article = await axios.get(`articles/${id}`);
-  return article;
+  const article = await instance.get(`articles/${id}`);
+  return article.data.article;
 };
 
 export const getCommentsByArticleId = async id => {
-  const comments = await axios.get(`articles/${id}/comments`);
-  return comments;
+  const comments = await instance.get(`articles/${id}/comments`);
+  return comments.data.comments;
 };
