@@ -73,7 +73,7 @@ class ArticleList extends Component {
         return (
             <this.Section>
                 <Router>
-                    <SingleArticle path=':article_id' colors={colors}/>
+                    <SingleArticle path=':article_id' colors={colors} user={this.props.user}/>
                 </Router>
                 {/* <Select handleSubmit={this.handleSelectSubmit} handleChange={this.handleSelectChange}/> */}
                 <article>

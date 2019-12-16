@@ -11,7 +11,9 @@ class SingleArticle extends Component {
         comments:[],
         isLoaded:false,
         err:'',
-        viewComments: false
+        viewComments: false,
+        createComment: false,
+        newComment: ''
     }
 
     Article = styled.article`
@@ -46,16 +48,40 @@ class SingleArticle extends Component {
         })
     }
     
-    clickHandler = (currentState) => {
-        this.setState({viewComments:!currentState.viewComments})
+    handleClick = ({target}) => {
+        this.setState((currentState) => {
+            return target.name === 'view' ? {viewComments:!currentState.viewComments} : target.name === 'create' ? {createComment:!currentState.createComment} : {}
+        })
+    }
+
+    handleChange = ({target:{value}}) => {
+        this.setState(() => {
+            return {newComment: value}
+        })
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        return api.postComment(this.props.article_id,this.props.user,event.target[0].value)
+        .then(response => {
+            console.log(response)
+            this.setState((currentState) => {
+                return {
+                    viewComments: true,
+                    comments:[response.data.comment,...currentState.comments],
+                    newComment:'',
+                    createComment:false
+                }
+            })
+        })
     }
 
     render() {
-        const {isLoaded,err, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
+        const {isLoaded,err, article:{article_id,title,body,votes,topic,author,created_at,comment_count}} = this.state
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay err={err}/>
         return (
-            <section>
+            <section >
                 <this.Article>
                     <h3>{title}</h3>
                     <h5>{author}</h5>
@@ -65,7 +91,15 @@ class SingleArticle extends Component {
                     <p>Votes: {votes}</p>
                     <p>Comments: {comment_count}</p> 
                 </this.Article>
-                <button onClick={this.clickHandler}>View Comments</button>
+                <button name='view' onClick={this.handleClick}>View Comments</button>
+                <button name='create' onClick={this.handleClick}>Comment</button>
+                {this.state.createComment && <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Comment:
+                        <textarea row='1' cols='50' onChange={this.handleChange} value={this.state.newComment}></textarea>
+                        <button>Submit</button>
+                    </label>
+                </form>}
                 {this.state.viewComments && this.state.comments.map((comment,index) => {
                         return <CommentCard key={comment.comment_id} comment={comment} color={this.props.colors[index%4]}/>
                 })}

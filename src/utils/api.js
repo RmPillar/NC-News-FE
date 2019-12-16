@@ -9,11 +9,12 @@ export const getAllTopics = async () => {
   return topics.data.topics;
 };
 
-export const getAllArticles = async ({ topicSlug }, page) => {
+export const getAllArticles = async ({ topicSlug }, { page, sortBy }) => {
   const articles = await instance.get('articles', {
     params: {
       topic: topicSlug,
-      p: page
+      p: page,
+      orderby: sortBy
     }
   });
   return articles.data.articles;
@@ -27,4 +28,12 @@ export const getArticleById = async id => {
 export const getCommentsByArticleId = async id => {
   const comments = await instance.get(`articles/${id}/comments`);
   return comments.data.comments;
+};
+
+export const postComment = async (id, username, body) => {
+  const newComment = await instance.post(`articles/${id}/comments`, {
+    username,
+    body
+  });
+  return newComment;
 };

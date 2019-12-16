@@ -3,7 +3,6 @@ import { Router } from '@reach/router';
 import './App.css';
 import Header from './components/Header';
 import ArticleList from './components/ArticleList';
-import SingleArticle from './components/SingleArticle';
 import Navbar from './components/Navbar';
 
 class App extends Component {
@@ -16,9 +15,8 @@ class App extends Component {
         <Header user={this.state.user} />
         <Navbar />
         <Router>
-          <ArticleList path='/articles/*' />
-          <ArticleList path='/:topicSlug/*' />
-          {/* <SingleArticle path=':article_id/' /> */}
+          <ArticleList path='/articles/*' user={this.state.user} />
+          <ArticleList path='topic/:topicSlug/' />
         </Router>
       </main>
     );
