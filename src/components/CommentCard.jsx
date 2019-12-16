@@ -36,7 +36,7 @@ class CommentCard extends Component {
             <this.Section>
                 <h5>{comment.author}</h5>
                 <p>{comment.body}</p>
-                <p>Posted At: {moment(comment.created_at).format("LT L")}</p>
+                <p>Posted At: {moment(comment.created_at).format("LT on L")}</p>
                 <p>Votes: {comment.votes}</p>
                 {user===comment.author && <button value={comment.comment_id}onClick={this.handleClick}>Delete</button>}
             </this.Section>

@@ -50,8 +50,9 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
                 </Link>
                 <P>{`Created By: ${author}`}</P>
                 <P>{`Topic: ${topic}`}</P>
-                <P>Posted At: {moment(created_at).format("LT L")}</P>
-                <P>{`Votes: ${votes} Comments: ${comment_count}`}</P>
+                <P>Posted At: {moment(created_at).format("LT on L")}</P>
+                <P>{`Votes: ${votes}`}</P>
+                <P>{`Comments: ${comment_count}`}</P>
             </section>
             <section id='buttons'>
                 <Button variant='outlined' style={style}  startIcon={<ThumbUpAltIcon />} disableElevation>
