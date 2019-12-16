@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components'
 
-const CommentCard = ({comment,color}) => {
-
-    const Section = styled.section`
+class CommentCard extends Component {
+    render() {
+        const {user,comment,color} = this.props
+        const Section = styled.section`
         padding: 0.5rem 0;
         margin: 0.5rem 1rem;
         border-radius: 10px;
@@ -22,8 +23,10 @@ const CommentCard = ({comment,color}) => {
             <p>{comment.body}</p>
             <p>{comment.created_at}</p>
             <p>{comment.votes}</p>
+            {user===comment.author && <button>Delete</button>}
         </Section>
     );
-};
+    }
+}
 
 export default CommentCard;
