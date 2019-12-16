@@ -4,8 +4,9 @@ import styled from 'styled-components'
 import * as api from '../utils/api'
 import ArticleCard from './ArticleCard';
 import Loader from './Loader'
+import Select from './Select'
 import SingleArticle from './SingleArticle';
-import { Button } from '@material-ui/core';
+import { Button} from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import ErrorDisplay from './ErrorDisplay';
 
@@ -14,7 +15,8 @@ class ArticleList extends Component {
         articles: [],
         isLoaded: false,
         page:1,
-        err: ''
+        err: '',
+        sortBy:'created_at'
     }
 
     Section = styled.section`
@@ -27,22 +29,15 @@ class ArticleList extends Component {
     `
 
     componentDidMount() {
-        api.getAllArticles(this.props,this.state.page).then(articles => {
-            this.setState({articles, isLoaded:true})
-        }).catch(({response:{data:{msg}}}) => {
-            this.setState({err:msg,isLoaded:true})
-        })
+        this.getArticles()
     }
 
     componentDidUpdate(prevProps,prevState) {
         if(prevProps.topicSlug !== this.props.topicSlug || prevState.page !== this.state.page) {
             window.scrollTo(0, 0)
-            api.getAllArticles(this.props,this.state.page).then(articles => {
-                this.setState({articles, isLoaded:true})
-            }).catch(({response:{data:{msg}}}) => {
-                this.setState({err:msg,isLoaded:true})
-            })
-    }}
+            this.getArticles()
+        }
+    }
 
     clickHandler = event => {
         const direction = event.target.innerText === 'NEXT' ? 1 : event.target.innerText === 'PREVIOUS' ? -1 : 0
@@ -51,6 +46,24 @@ class ArticleList extends Component {
         });
       };
     
+    handleSelectChange = (event) => {
+        this.setState({sortBy:event.target.value})
+    }
+
+    handleSelectSubmit = (event) => {
+        event.preventDefault()
+        this.setState({isLoaded:false})
+        this.getArticles()
+        
+    }
+
+    getArticles = () => {
+        api.getAllArticles(this.props,this.state).then(articles => {
+            this.setState({articles, isLoaded:true})
+        }).catch(({response:{data:{msg}}}) => {
+            this.setState({err:msg,isLoaded:true})
+        })
+    }
 
     render() {
         const {articles, isLoaded, err} = this.state
@@ -62,6 +75,7 @@ class ArticleList extends Component {
                 <Router>
                     <SingleArticle path=':article_id' colors={colors}/>
                 </Router>
+                {/* <Select handleSubmit={this.handleSelectSubmit} handleChange={this.handleSelectChange}/> */}
                 <article>
                     {articles.map((article, index) => {
                         return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]}/>
