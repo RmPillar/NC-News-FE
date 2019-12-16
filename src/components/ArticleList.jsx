@@ -61,20 +61,21 @@ class ArticleList extends Component {
                 {articles.map((article, index) => {
                     return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]}/>
                 })}
-                {this.state.page > 1 &&  <Button
-                    variant='outlined'
-                    startIcon={<NavigateNextIcon />}
-                    onClick={this.clickHandler}
-                >
-                    Previous
-                </Button>}
-                <Button
-                    variant='outlined'
-                    startIcon={<NavigateNextIcon />}
-                    onClick={this.clickHandler}
-                >
-                    Next
-                </Button>
+                {this.state.page > 1 &&
+                    <Button
+                        variant='outlined'
+                        startIcon={<NavigateNextIcon />}
+                        onClick={this.clickHandler}
+                    >
+                        Previous
+                    </Button>}
+                    <Button
+                        variant='outlined'
+                        startIcon={<NavigateNextIcon />}
+                        onClick={this.clickHandler}
+                    >
+                        Next
+                    </Button>
             </this.Section>
         );
     }
