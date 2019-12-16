@@ -92,7 +92,7 @@ class SingleArticle extends Component {
     }
 
     render() {
-        const {isLoaded,err, article:{article_id,title,body,votes,topic,author,created_at,comment_count}} = this.state
+        const {isLoaded,err, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay err={err}/>
         return (
@@ -116,7 +116,7 @@ class SingleArticle extends Component {
                     <label>
                         Comment:
                         <textarea row='1' cols='50' onChange={this.handleChange} value={this.state.newComment}></textarea>
-                        <button>Submit</button>
+                        <button disabled={!this.state.newComment}>Submit</button>
                     </label>
                 </form>}
                 <this.Section >
