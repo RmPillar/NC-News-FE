@@ -37,6 +37,13 @@ class SingleArticle extends Component {
         justify-content:center;
     `
 
+    Info = styled.section`
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        justify-content:space-around;
+    `
+
     componentDidMount() {
         return this.fetchArticleById(this.props.article_id)
     }
@@ -91,13 +98,17 @@ class SingleArticle extends Component {
         return (
            <section>
                 <this.Article>
-                    <h3>{title}</h3>
-                    <h5>{author}</h5>
-                    <p>{topic}</p>
+                    <h2>{title}</h2>
+                    <this.Info>
+                        <h5>Created By: {author}</h5>
+                        <h5>Topic: {topic}</h5>
+                    </this.Info>
                     <p>{body}</p>
                     <p>Posted At: {moment(created_at).format("LT l")}</p>
-                    <p>Votes: {votes}</p>
-                    <p>Comments: {comment_count}</p> 
+                    <this.Info>
+                        <p>Votes: {votes}</p>
+                        <p>Comments: {comment_count}</p> 
+                    </this.Info>
                 </this.Article>
                 <button name='view' onClick={this.handleClick}>View Comments</button>
                 <button name='create' onClick={this.handleClick}>Comment</button>
