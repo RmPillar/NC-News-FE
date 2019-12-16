@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as api from '../utils/api'
 import Loader from './Loader';
 import CommentCard from './CommentCard'
+import styled from 'styled-components'
 
 class SingleArticle extends Component {
     state = {
@@ -9,6 +10,19 @@ class SingleArticle extends Component {
         comments:[],
         isLoaded:false
     }
+
+    Article = styled.article`
+        padding: 0px 20px 0px 20px;
+        margin: 0.5rem 1rem;
+        border-radius: 10px;
+        color: #3e3e3e;
+        background: transparent;
+        width: 40vw;
+        min-width: 300px;
+        height: auto;
+        border: 2px solid #26547C;
+        font-family: 'Roboto', sans-serif;
+    `
 
     componentDidMount() {
         return this.fetchArticleById(this.props.article_id)
@@ -31,18 +45,21 @@ class SingleArticle extends Component {
         const {title,body,votes,topic,author,created_at,comment_count} = this.state.article
         if(!this.state.isLoaded) return <Loader/>
         return (
-            <article>
-                <h3>{title}</h3>
-                <h5>{author}</h5>
-                <p>{topic}</p>
-                <p>{body}</p>
-                <p>Posted At: {created_at}</p>
-                <p>Votes: {votes}</p>
-                <p>Comments: {comment_count}</p>
+            <section>
+                <this.Article>
+                    <h3>{title}</h3>
+                    <h5>{author}</h5>
+                    <p>{topic}</p>
+                    <p>{body}</p>
+                    <p>Posted At: {created_at}</p>
+                    <p>Votes: {votes}</p>
+                    <p>Comments: {comment_count}</p>
+                    
+                </this.Article>
                 {this.state.comments.map(comment => {
-                    return <CommentCard key={comment.comment_id} comment={comment}/>
+                        return <CommentCard key={comment.comment_id} comment={comment}/>
                 })}
-            </article>
+            </section>
         );
     }
 }
