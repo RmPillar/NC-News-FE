@@ -38,7 +38,6 @@ class Navbar extends Component {
         const {topics} = this.state
         return (
             <this.Nav>
-                <Link to='/'><Button>Home</Button></Link>
                 <form onSubmit={this.onSubmit}>
                 <label>
                     Filter By: 
