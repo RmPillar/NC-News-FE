@@ -34,9 +34,9 @@ class Navbar extends Component {
         return (
             <this.Nav>
                 <Link to='/'><Button>Home</Button></Link>
-                {topics.map((topic) => {
-                    return <Link to ={`topic/${topic}`.toLowerCase()} key={topic}>
-                        <Button>{topic}</Button>
+                {topics.map(({slug}) => {
+                    return <Link to ={`topic/${slug}`.toLowerCase()} key={slug}>
+                        <Button>{slug}</Button>
                     </Link>
                 })}
             </this.Nav>

@@ -1,33 +1,30 @@
 const axios = require('axios');
 
-const baseURL = 'https://nc-news-rpillar.herokuapp.com/api';
+const instance = axios.create({
+  baseURL: 'https://nc-news-rpillar.herokuapp.com/api'
+});
 
-exports.getAllTopics = () => {
-  return axios.get(`${baseURL}/topics`).then(({ data }) => {
-    return data.topics.map(({ slug }) => {
-      return slug.slice(0, 1).toUpperCase() + slug.slice(1);
-    });
-  });
+export const getAllTopics = async () => {
+  const topics = await instance.get('topics');
+  return topics.data.topics;
 };
 
-exports.getAllArticles = ({ topicSlug }, page) => {
-  return axios
-    .get(`${baseURL}/articles`, {
-      params: { topic: topicSlug, p: page }
-    })
-    .then(({ data }) => {
-      return data.articles;
-    });
+export const getAllArticles = async ({ topicSlug }, page) => {
+  const articles = await instance.get('articles', {
+    params: {
+      topic: topicSlug,
+      p: page
+    }
+  });
+  return articles.data.articles;
 };
 
-exports.getArticleById = id => {
-  return axios.get(`${baseURL}/articles/${id}`).then(({ data }) => {
-    return data.article;
-  });
+export const getArticleById = async id => {
+  const article = await axios.get(`articles/${id}`);
+  return article;
 };
 
-exports.getCommentsByArticleId = id => {
-  return axios.get(`${baseURL}/articles/${id}/comments`).then(({ data }) => {
-    return data.comments;
-  });
+export const getCommentsByArticleId = async id => {
+  const comments = await axios.get(`articles/${id}/comments`);
+  return comments;
 };
