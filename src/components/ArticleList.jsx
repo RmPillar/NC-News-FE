@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Router} from '@reach/router'
+import {Router,Navigate} from '@reach/router'
 import styled from 'styled-components'
 import * as api from '../utils/api'
 import ArticleCard from './ArticleCard';
@@ -59,7 +59,7 @@ class ArticleList extends Component {
 
     getArticles = () => {
         api.getAllArticles(this.props,this.state).then(articles => {
-            this.setState({articles, isLoaded:true})
+            this.setState({articles, isLoaded:true,sortBy:'created_at'})
         }).catch(({response:{data:{msg}}}) => {
             this.setState({err:msg,isLoaded:true})
         })
@@ -75,8 +75,8 @@ class ArticleList extends Component {
                 <Router>
                     <SingleArticle path=':article_id' colors={colors} user={this.props.user}/>
                 </Router>
-                {/* <Select handleSubmit={this.handleSelectSubmit} handleChange={this.handleSelectChange}/> */}
                 <article>
+                <Select handleSubmit={this.handleSelectSubmit} handleChange={this.handleSelectChange}/>
                     {articles.map((article, index) => {
                         return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]}/>
                     })}

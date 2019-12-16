@@ -14,7 +14,7 @@ export const getAllArticles = async ({ topicSlug }, { page, sortBy }) => {
     params: {
       topic: topicSlug,
       p: page,
-      orderby: sortBy
+      sort_by: sortBy || 'created_at'
     }
   });
   return articles.data.articles;
