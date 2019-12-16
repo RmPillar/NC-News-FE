@@ -3,12 +3,14 @@ import * as api from '../utils/api'
 import Loader from './Loader';
 import CommentCard from './CommentCard'
 import styled from 'styled-components'
+import ErrorDisplay from './ErrorDisplay';
 
 class SingleArticle extends Component {
     state = {
         article: {},
         comments:[],
-        isLoaded:false
+        isLoaded:false,
+        err:''
     }
 
     Article = styled.article`
@@ -37,13 +39,16 @@ class SingleArticle extends Component {
         return Promise.all([api.getArticleById(id), api.getCommentsByArticleId(id)])
         .then(data => {
             this.setState({article:data[0],comments:data[1],isLoaded:true})
+        }).catch(({response:{data:{msg}}}) => {
+            this.setState({err:msg,isLoaded:true})
         })
         }
     
 
     render() {
-        const {title,body,votes,topic,author,created_at,comment_count} = this.state.article
-        if(!this.state.isLoaded) return <Loader/>
+        const {isLoaded,err, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
+        if(!isLoaded) return <Loader/>
+        if(err) return <ErrorDisplay err={err}/>
         return (
             <section>
                 <this.Article>
