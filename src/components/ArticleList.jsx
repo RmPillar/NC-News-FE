@@ -25,24 +25,18 @@ class ArticleList extends Component {
     `
 
     componentDidMount() {
-        api.getAllArticles().then(articles => {
+        api.getAllArticles(this.props,this.state.page).then(articles => {
             this.setState({articles, isLoaded:true})
         })
     }
 
     componentDidUpdate(prevProps,prevState) {
-        if(prevProps.topicSlug !== this.props.topicSlug) {
+        if(prevProps.topicSlug !== this.props.topicSlug || prevState.page !== this.state.page) {
             window.scrollTo(0, 0)
-            api.getAllArticles({topic:this.props.topicSlug}).then(articles => {
+            api.getAllArticles(this.props,this.state.page).then(articles => {
                 this.setState({articles, isLoaded:true})
             })
-        } else if (prevState.page !== this.state.page) {
-            window.scrollTo(0, 0)
-            api.getAllArticles({p:this.state.page}).then(articles=> {
-                this.setState({articles, isLoaded:true})
-            })
-        }
-    }
+    }}
 
     clickHandler = event => {
         const direction = event.target.innerText === 'NEXT' ? 1 : event.target.innerText === 'PREVIOUS' ? -1 : 0

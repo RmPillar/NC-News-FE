@@ -10,10 +10,10 @@ exports.getAllTopics = () => {
   });
 };
 
-exports.getAllArticles = query => {
+exports.getAllArticles = ({ topicSlug }, page) => {
   return axios
     .get(`${baseURL}/articles`, {
-      params: query
+      params: { topic: topicSlug, p: page }
     })
     .then(({ data }) => {
       return data.articles;
