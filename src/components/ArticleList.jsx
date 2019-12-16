@@ -17,8 +17,10 @@ class ArticleList extends Component {
 
     Section = styled.section`
         display:flex;
-        flex-direction:column;
-        align-items:center
+        flex-direction:row;
+        flex-direction:row-reverse;
+        align-items:flex-start;
+        
     `
 
     componentDidMount() {
@@ -58,24 +60,26 @@ class ArticleList extends Component {
                 <Router>
                     <SingleArticle path='articles/:article_id'/>
                 </Router>
-                {articles.map((article, index) => {
-                    return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]}/>
-                })}
-                {this.state.page > 1 &&
-                    <Button
-                        variant='outlined'
-                        startIcon={<NavigateNextIcon />}
-                        onClick={this.clickHandler}
-                    >
-                        Previous
-                    </Button>}
-                    <Button
-                        variant='outlined'
-                        startIcon={<NavigateNextIcon />}
-                        onClick={this.clickHandler}
-                    >
-                        Next
-                    </Button>
+                <article>
+                    {articles.map((article, index) => {
+                        return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]}/>
+                    })}
+                    {this.state.page > 1 &&
+                        <Button
+                            variant='outlined'
+                            startIcon={<NavigateNextIcon />}
+                            onClick={this.clickHandler}
+                        >
+                            Previous
+                        </Button>}
+                        <Button
+                            variant='outlined'
+                            startIcon={<NavigateNextIcon />}
+                            onClick={this.clickHandler}
+                        >
+                            Next
+                        </Button>
+                </article>
             </this.Section>
         );
     }
