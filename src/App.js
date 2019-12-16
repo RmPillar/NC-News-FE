@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/Header';
 import ArticleList from './components/ArticleList';
 import SingleArticle from './components/SingleArticle';
+import Navbar from './components/Navbar';
 
 class App extends Component {
   state = {
@@ -13,10 +14,11 @@ class App extends Component {
     return (
       <main className='App'>
         <Header user={this.state.user} />
+        <Navbar />
         <Router>
           <ArticleList path='/articles/*' />
           <ArticleList path='/:topicSlug/*' />
-          <SingleArticle path='/article/:article_id/' />
+          {/* <SingleArticle path=':article_id/' /> */}
         </Router>
       </main>
     );

@@ -20,7 +20,7 @@ class ArticleList extends Component {
         flex-direction:row;
         flex-direction:row-reverse;
         align-items:flex-start;
-        
+        justify-content:center;
     `
 
     componentDidMount() {
@@ -58,7 +58,7 @@ class ArticleList extends Component {
         return (
             <this.Section>
                 <Router>
-                    <SingleArticle path='articles/:article_id'/>
+                    <SingleArticle path=':article_id'/>
                 </Router>
                 <article>
                     {articles.map((article, index) => {

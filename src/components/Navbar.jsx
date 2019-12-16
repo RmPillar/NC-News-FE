@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from '@reach/router'
+import {Link,Navigate} from '@reach/router'
 import styled from 'styled-components'
 import Button from './Button'
 import * as api from '../utils/api'
@@ -29,16 +29,27 @@ class Navbar extends Component {
         })
     }
 
+    onSubmit=(event) => {
+        event.preventDefault();
+        console.log(event)
+    }
+
     render() {
         const {topics} = this.state
         return (
             <this.Nav>
                 <Link to='/'><Button>Home</Button></Link>
-                {topics.map((topic) => {
-                    return <Link to ={`/${topic}`.toLowerCase()} key={topic}>
-                        <Button>{topic}</Button>
-                    </Link>
-                })}
+                <form onSubmit={this.onSubmit}>
+                <label>
+                    Filter By: 
+                <select>
+                    {topics.map((topic) => {
+                        return <option key={topic.topic_id}>{topic}</option>
+                    })}
+                </select>
+                <button>Filter</button>
+                </label>
+                </form>
             </this.Nav>
 
         );
