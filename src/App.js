@@ -16,7 +16,6 @@ class App extends Component {
         <Navbar />
         <Router>
           <ArticleList path='/articles/*' user={this.state.user} />
-          <ArticleList path='/articles?:sort_by' user={this.state.user} />
           <ArticleList path='topic/:topicSlug/' />
           <ArticleList path='user/:username/' />
         </Router>
