@@ -17,6 +17,7 @@ class App extends Component {
         <Router>
           <ArticleList path='/articles/*' user={this.state.user} />
           <ArticleList path='topic/:topicSlug/' />
+          <ArticleList path='user/:username/' />
         </Router>
       </main>
     );
