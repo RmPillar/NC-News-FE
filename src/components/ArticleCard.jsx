@@ -48,7 +48,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
                 <Link id='name' to={`/articles/${article_id}`}>
                     <H4>{title.length < 40 ? title : title.slice(0,40)+'...'}</H4>
                 </Link>
-                <P>{`Created By: ${author}`}</P>
+                <P>{'Created By:'}<Link to={`/user/${author}`}>{author}</Link></P>
                 <P>{`Topic: ${topic}`}</P>
                 <P>Posted At: {moment(created_at).format("LT on L")}</P>
                 <P>{`Votes: ${votes}`}</P>
@@ -61,9 +61,6 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
                 <Button variant='outlined' style={style} startIcon={<ThumbDownAltIcon />}>
                     Dislike
                 </Button>
-                {/* <Button variant='outlined' style={style} startIcon={<ChatBubbleIcon/>}>
-                    Comment
-                </Button> */}
             </section>
         </Article>
     );

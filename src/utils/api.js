@@ -9,10 +9,14 @@ export const getAllTopics = async () => {
   return topics.data.topics;
 };
 
-export const getAllArticles = async ({ topicSlug }, { page, sortBy }) => {
+export const getAllArticles = async (
+  { topicSlug, username },
+  { page, sortBy }
+) => {
   const articles = await instance.get('articles', {
     params: {
       topic: topicSlug,
+      author: username,
       p: page,
       sort_by: sortBy || 'created_at'
     }

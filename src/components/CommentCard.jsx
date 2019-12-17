@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from '@reach/router'
 import styled from 'styled-components'
 import moment from 'moment'
 import * as api from '../utils/api'
@@ -34,7 +35,7 @@ class CommentCard extends Component {
         if(this.state.isDeleted) return <h3>Your comment has been deleted</h3>
         return (
             <this.Section>
-                <h5>{comment.author}</h5>
+                <h5><Link to={`/user/${comment.author}`}>{comment.author}</Link></h5>
                 <p>{comment.body}</p>
                 <p>Posted At: {moment(comment.created_at).format("LT on L")}</p>
                 <p>Votes: {comment.votes}</p>

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {Router} from '@reach/router'
 import styled from 'styled-components'
-import * as api from '../utils/api'
+import { Button } from '@material-ui/core';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import ArticleCard from './ArticleCard';
 import Loader from './Loader'
 import Select from './Select'
 import SingleArticle from './SingleArticle';
-import { Button} from '@material-ui/core';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import ErrorDisplay from './ErrorDisplay';
+import * as api from '../utils/api'
 
 class ArticleList extends Component {
     state = {
@@ -33,7 +33,7 @@ class ArticleList extends Component {
     }
 
     componentDidUpdate(prevProps,prevState) {
-        if(prevProps.topicSlug !== this.props.topicSlug || prevState.page !== this.state.page) {
+        if(prevProps.topicSlug !== this.props.topicSlug || prevProps.user !== this.props.user || prevState.page !== this.state.page) {
             window.scrollTo(0, 0)
             this.getArticles()
         }

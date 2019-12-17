@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from '@reach/router'
 import styled from 'styled-components'
 import { Button, TextField } from '@material-ui/core';
 import moment from 'moment'
@@ -84,7 +85,6 @@ class SingleArticle extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        console.log(event)
         return api.postComment(this.props.article_id,this.props.user,event.currentTarget[0].value)
         .then(response => {
             this.setState((currentState) => {
@@ -107,7 +107,7 @@ class SingleArticle extends Component {
                 <this.Article>
                     <h2>{title}</h2>
                     <this.Info>
-                        <h5>Created By: {author}</h5>
+                        <h5>Created By:<Link to={`/user/${author}`}>{author}</Link></h5>
                         <h5>Topic: {topic}</h5>
                     </this.Info>
                     <p>{body}</p>
@@ -121,10 +121,8 @@ class SingleArticle extends Component {
                 <Button variant='outlined' style={this.style} name='create' onClick={this.handleClick}>Comment</Button>
                 <this.Info>
                     {this.state.createComment && <form onSubmit={this.handleSubmit}>
-                       
-                            <TextField error={!this.state.newComment} variant='outlined' placeholder='Comment' onChange={this.handleChange} value={this.state.newComment}></TextField>
-                            <Button variant='outlined' style={this.style} disabled={!this.state.newComment} type='submit'>Submit</Button>
-                        
+                        <TextField error={!this.state.newComment} variant='outlined' placeholder='Comment' onChange={this.handleChange} value={this.state.newComment}></TextField>
+                        <Button variant='outlined' style={this.style} disabled={!this.state.newComment} type='submit'>Submit</Button>   
                     </form>}
                 </this.Info>
                 <this.Section >
