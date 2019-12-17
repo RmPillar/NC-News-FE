@@ -57,8 +57,8 @@ export const postNewArticle = async ({ title, topic, article }, user) => {
   return newArticle.data.article;
 };
 
-export const patchVote = async (name, id) => {
-  const updateVote = await instance.patch(`articles/${id}`, {
+export const patchVote = async (name, id, type) => {
+  const updateVote = await instance.patch(`${type}/${id}`, {
     inc_votes: +name
   });
   return updateVote;

@@ -100,8 +100,7 @@ class SingleArticle extends Component {
     }
 
     render() {
-        console.log(this.style.color)
-        const {isLoaded,err, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
+        const {isLoaded,err, viewComments, comments, createComment, newComment, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay err={err}/>
         return (
@@ -117,18 +116,18 @@ class SingleArticle extends Component {
                     <this.Info>
                         <p>Comments: {comment_count}</p> 
                     </this.Info>
-                    <Voter id={this.props.article_id} color={this.style.color} votes={votes}/>
+                    <Voter id={this.props.article_id} color={this.style.color} votes={votes} type='article'/>
                 </this.Article>
                 <Button variant='outlined' style={this.style} name='view' onClick={this.handleClick}>View Comments</Button>
                 <Button variant='outlined' style={this.style} name='create' onClick={this.handleClick}>Comment</Button>
                 <this.Info>
-                    {this.state.createComment && <form onSubmit={this.handleSubmit}>
-                        <TextField error={!this.state.newComment} variant='outlined' placeholder='Comment' onChange={this.handleChange} value={this.state.newComment}></TextField>
-                        <Button variant='outlined' style={this.style} disabled={!this.state.newComment} type='submit'>Submit</Button>   
+                    {createComment && <form onSubmit={this.handleSubmit}>
+                        <TextField error={!newComment} variant='outlined' placeholder='Comment' onChange={this.handleChange} value={newComment}></TextField>
+                        <Button variant='outlined' style={this.style} disabled={!newComment} type='submit'>Submit</Button>   
                     </form>}
                 </this.Info>
                 <this.Section >
-                {this.state.viewComments && this.state.comments.map((comment,index) => {
+                {viewComments && comments.map((comment,index) => {
                     return <CommentCard 
                         key={comment.comment_id} 
                         comment={comment} 

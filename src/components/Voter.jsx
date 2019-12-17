@@ -36,7 +36,7 @@ class Voter extends Component {
                 votes: currentState.votes + +name
             }
         })
-        api.patchVote(name,this.props.id)
+        api.patchVote(name,this.props.id, this.props.type)
     }
 
     render() {
