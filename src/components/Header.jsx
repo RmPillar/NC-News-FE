@@ -15,7 +15,6 @@ const Header = ({user}) => {
         margin: 0 0 30px 0;
         width: 100%;
         background: #26547C;
-        color: black;
         font-family: 'Roboto', sans-serif;
         z-index:1
     `

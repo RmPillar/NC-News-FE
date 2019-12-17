@@ -63,3 +63,12 @@ export const patchVote = async (name, id, type) => {
   });
   return updateVote;
 };
+
+export const createUser = async (username, name) => {
+  const newUser = await instance.post('users', {
+    username,
+    name,
+    avatar_url: 'www.thisisiaurl.co.uk'
+  });
+  return newUser;
+};
