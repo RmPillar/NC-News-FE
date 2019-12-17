@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Router} from '@reach/router'
+import {Router, Link} from '@reach/router'
 import styled from 'styled-components'
 import { Button } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
@@ -9,6 +9,7 @@ import Select from './Select'
 import SingleArticle from './SingleArticle';
 import ErrorDisplay from './ErrorDisplay';
 import * as api from '../utils/api'
+import NewArticle from './NewArticle';
 
 class ArticleList extends Component {
     state = {
@@ -64,6 +65,16 @@ class ArticleList extends Component {
         })
     }
 
+    postArticle = (article) => {
+        return api.postNewArticle(article,this.props.user).then(article => {
+            this.setState(currentState => {
+                return {
+                    articles:[article,...currentState.articles]
+                }
+            })
+        })
+    }
+
     render() {
         const {articles, isLoaded, err} = this.state
         const colors = ['26547C','EF476F','FFD166','06D6A0']
@@ -73,9 +84,11 @@ class ArticleList extends Component {
             <this.Section>
                 <Router>
                     <SingleArticle path=':article_id' colors={colors} user={this.props.user}/>
+                    <NewArticle path='/new-article' postArticle={this.postArticle}/>
                 </Router>
                 <article>
                 <Select handleSubmit={this.handleSelectSubmit} handleChange={this.handleSelectChange}/>
+                <Link to='/articles/new-article'><button>New Article</button></Link>
                     {articles.map((article, index) => {
                         return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]}/>
                     })}
