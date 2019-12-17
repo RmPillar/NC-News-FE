@@ -118,25 +118,28 @@ class SingleArticle extends Component {
                     </this.Info>
                     <Voter id={this.props.article_id} color={this.style.color} votes={votes} type='article'/>
                 </this.Article>
+
                 <Button variant='outlined' style={this.style} name='view' onClick={this.handleClick}>View Comments</Button>
                 <Button variant='outlined' style={this.style} name='create' onClick={this.handleClick}>Comment</Button>
+
                 <this.Info>
                     {createComment && <form onSubmit={this.handleSubmit}>
                         <TextField error={!newComment} variant='outlined' placeholder='Comment' onChange={this.handleChange} value={newComment}></TextField>
                         <Button variant='outlined' style={this.style} disabled={!newComment} type='submit'>Submit</Button>   
                     </form>}
                 </this.Info>
+
                 <this.Section >
-                {viewComments && comments.map((comment,index) => {
-                    return <CommentCard 
-                        key={comment.comment_id} 
-                        comment={comment} 
-                        color={this.props.colors[index%4]} 
-                        user={this.props.user} 
-                        article_id={this.props.article_id}
-                    />
-                })}
-            </this.Section>
+                    {viewComments && comments.map((comment,index) => {
+                        return <CommentCard 
+                            key={comment.comment_id} 
+                            comment={comment} 
+                            color={this.props.colors[index%4]} 
+                            user={this.props.user} 
+                            article_id={this.props.article_id}
+                        />
+                    })}
+                </this.Section>
            </section>
         );
     }
