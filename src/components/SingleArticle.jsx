@@ -17,7 +17,8 @@ class SingleArticle extends Component {
         err:'',
         viewComments: false,
         createComment: false,
-        newComment: ''
+        newComment: '',
+        hasCommented: false
     }
 
     Article = styled.article`
@@ -86,6 +87,7 @@ class SingleArticle extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
+        this.setState({hasCommented:true})
         return api.postComment(this.props.article_id,this.props.user,event.currentTarget[0].value)
         .then(response => {
             this.setState((currentState) => {
@@ -93,14 +95,15 @@ class SingleArticle extends Component {
                     viewComments: true,
                     comments:[response.data.comment,...currentState.comments],
                     newComment:'',
-                    createComment:false
+                    createComment:false,
+                    hasCommented:false
                 }
             })
         })
     }
 
     render() {
-        const {isLoaded,err, viewComments, comments, createComment, newComment, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
+        const {isLoaded,err, viewComments, hasCommented, comments, createComment, newComment, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay err={err}/>
         return (
@@ -125,7 +128,7 @@ class SingleArticle extends Component {
                 <this.Info>
                     {createComment && <form onSubmit={this.handleSubmit}>
                         <TextField error={!newComment} variant='outlined' placeholder='Comment' onChange={this.handleChange} value={newComment}></TextField>
-                        <Button variant='outlined' style={this.style} disabled={!newComment} type='submit'>Submit</Button>   
+                        <Button variant='outlined' style={this.style} disabled={!newComment || hasCommented} type='submit'>Submit</Button>   
                     </form>}
                 </this.Info>
 
@@ -137,6 +140,7 @@ class SingleArticle extends Component {
                             color={this.props.colors[index%4]} 
                             user={this.props.user} 
                             article_id={this.props.article_id}
+
                         />
                     })}
                 </this.Section>
