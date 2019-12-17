@@ -56,3 +56,10 @@ export const postNewArticle = async ({ title, topic, article }, user) => {
   });
   return newArticle.data.article;
 };
+
+export const patchVote = async (name, id) => {
+  const updateVote = await instance.patch(`articles/${id}`, {
+    inc_votes: +name
+  });
+  return updateVote;
+};
