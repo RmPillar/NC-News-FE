@@ -77,7 +77,7 @@ class ArticleList extends Component {
 
     render() {
         const {articles, isLoaded, err} = this.state
-        const colors = ['26547C','EF476F','FFD166','06D6A0']
+        const colors = ['#26547C','#EF476F','#FFD166','#06D6A0']
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay/>
         return (

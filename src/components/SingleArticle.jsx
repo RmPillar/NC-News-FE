@@ -7,6 +7,7 @@ import Loader from './Loader';
 import CommentCard from './CommentCard'
 import ErrorDisplay from './ErrorDisplay';
 import * as api from '../utils/api'
+import Voter from './Voter';
 
 class SingleArticle extends Component {
     state = {
@@ -99,6 +100,7 @@ class SingleArticle extends Component {
     }
 
     render() {
+        console.log(this.style.color)
         const {isLoaded,err, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay err={err}/>
@@ -113,9 +115,9 @@ class SingleArticle extends Component {
                     <p>{body}</p>
                     <p>Posted At: {moment(created_at).format("LT on l")}</p>
                     <this.Info>
-                        <p>Votes: {votes}</p>
                         <p>Comments: {comment_count}</p> 
                     </this.Info>
+                    <Voter id={this.props.article_id} color={this.style.color} votes={votes}/>
                 </this.Article>
                 <Button variant='outlined' style={this.style} name='view' onClick={this.handleClick}>View Comments</Button>
                 <Button variant='outlined' style={this.style} name='create' onClick={this.handleClick}>Comment</Button>

@@ -11,8 +11,8 @@ class Voter extends Component {
 
     style = {
         primary: {
-            color: `#${this.props.color}`,
-            border: `2px solid #${this.props.color}`, 
+            color: `${this.props.color}`,
+            border: `2px solid ${this.props.color}`, 
             width: '100px',
             margin: '5px',
             display:'flex',
@@ -20,8 +20,8 @@ class Voter extends Component {
         },
         secondary: {
             color: `#FCFCFC`,
-            background: `#${this.props.color}`,
-            border: `2px solid #${this.props.color}`,
+            background: `${this.props.color}`,
+            border: `2px solid ${this.props.color}`,
             width: '100px', 
             margin: '5px',
             display:'flex',

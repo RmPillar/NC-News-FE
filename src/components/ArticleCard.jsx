@@ -1,10 +1,8 @@
 import React from 'react';
 import {Link} from '@reach/router'
 import styled from 'styled-components'
-import { Button } from '@material-ui/core';
-import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import moment from 'moment'
+import Voter from './Voter';
 
 
 const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,votes,comment_count},color}) => {
@@ -18,7 +16,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         width: 35vw;
         min-width: 300px;
         height: 200px;
-        border: 2px solid ${`#${color}`};
+        border: 2px solid ${`${color}`};
         font-family: 'Roboto', sans-serif;
         display:grid;
         grid-template-columns: 3fr 1fr
@@ -37,11 +35,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         margin:3px 0px 3px 0px;
     `
 
-      const style = {
-          color: `#${color}`,
-          border: `2px solid #${color}`, 
-          margin: '5px'
-      }
+      
     return (
         <Article>
             <section id='main'>
@@ -51,16 +45,10 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
                 <P>{'Created By:'}<Link to={`/user/${author}`}>{author}</Link></P>
                 <P>{`Topic: ${topic}`}</P>
                 <P>Posted At: {moment(created_at).format("LT on L")}</P>
-                <P>{`Votes: ${votes}`}</P>
                 <P>{`Comments: ${comment_count}`}</P>
             </section>
             <section id='buttons'>
-                <Button variant='outlined' style={style}  startIcon={<ThumbUpAltIcon />} disableElevation>
-                    Like
-                </Button>
-                <Button variant='outlined' style={style} startIcon={<ThumbDownAltIcon />}>
-                    Dislike
-                </Button>
+                <Voter id={article_id} color={color} votes={votes}/>
             </section>
         </Article>
     );
