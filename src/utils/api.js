@@ -21,7 +21,7 @@ export const getAllArticles = async (
       sort_by: sortBy || 'created_at'
     }
   });
-  return articles.data.articles;
+  return articles.data;
 };
 
 export const getArticleById = async id => {
