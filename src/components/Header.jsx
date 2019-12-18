@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import {Link} from '@reach/router'
+import { Button } from '@material-ui/core';
 
 
 const Header = ({user,handleClick}) => {
@@ -22,20 +23,28 @@ const Header = ({user,handleClick}) => {
     const H1 = styled.h1`
         font-size: 50px;
         color:#FCFCFC;
-        margin: 0px 0px 0px 10px;
+        margin: 0px 0px 0px 10px
     `
-    const H3 = styled.h3`
+    const H2 = styled.h2`
         color:#FCFCFC;
         margin: 0px 10px 0px 0px;
     `
+
+    const buttonStyle = {
+        color: `#FCFCFC`,
+        border: `2px solid #FCFCFC`, 
+        width: '100px',
+        marginRight: '10px',
+    }
+
 
     return (
         <Header>
             <Link to='/articles'>
                 <H1>NC NEWS</H1>
             </Link>
-            <H3>Welcome: {user}</H3>
-            <button onClick ={handleClick}>Logout</button>
+            <H2>{user}</H2>
+            <Button onClick = {handleClick} style={buttonStyle}>Logout</Button>
         </Header>
     );
 };
