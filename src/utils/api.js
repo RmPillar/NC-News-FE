@@ -64,6 +64,11 @@ export const patchVote = async (name, id, type) => {
   return updateVote;
 };
 
+export const getAllUsers = async () => {
+  const allUsers = await instance.get('users');
+  return allUsers.data.users;
+};
+
 export const createUser = async (username, name) => {
   const newUser = await instance.post('users', {
     username,

@@ -9,18 +9,34 @@ import * as api from './utils/api';
 
 class App extends Component {
   state = {
-    user: 'jessjelly',
+    user: '',
     name: '',
-    loggedIn: true
+    loggedIn: false,
+    users: []
   };
 
+  componentDidMount() {
+    const userData = {
+      user: localStorage.getItem('user') || '',
+      name: localStorage.getItem('name') || '',
+      loggedIn: localStorage.getItem('loggedIn') || false
+    };
+    api.getAllUsers().then(users => {
+      this.setState({ ...userData, users });
+    });
+  }
+
   handleChange = ({ target }) => {
+    localStorage.setItem(target.name, target.value);
     this.setState({ [target.name]: target.value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    api.createUser(this.state.user, this.state.name);
+    localStorage.setItem('loggedIn', true);
+    if (this.state.users.find(user => user.username === this.state.user)) {
+      api.createUser(this.state.user, this.state.name);
+    }
     this.setState({ loggedIn: true });
   };
 
