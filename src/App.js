@@ -34,10 +34,21 @@ class App extends Component {
   handleSubmit = event => {
     event.preventDefault();
     localStorage.setItem('loggedIn', true);
-    if (this.state.users.find(user => user.username === this.state.user)) {
+    if (!this.state.users.find(user => user.username === this.state.user)) {
       api.createUser(this.state.user, this.state.name);
     }
     this.setState({ loggedIn: true });
+  };
+
+  handleClick = () => {
+    localStorage.clear();
+    this.setState(() => {
+      return {
+        user: '',
+        name: '',
+        loggedIn: false
+      };
+    });
   };
 
   render() {
@@ -50,7 +61,7 @@ class App extends Component {
       );
     return (
       <main className='App'>
-        <Header user={this.state.user} />
+        <Header user={this.state.user} handleClick={this.handleClick} />
         <Navbar />
         <Router>
           <ArticleList path='/articles/*' user={this.state.user} />

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {Link} from '@reach/router'
 
 
-const Header = ({user}) => {
+const Header = ({user,handleClick}) => {
     const Header = styled.header`
         position: -webkit-sticky;
         position: sticky;
@@ -35,6 +35,7 @@ const Header = ({user}) => {
                 <H1>NC NEWS</H1>
             </Link>
             <H3>Welcome: {user}</H3>
+            <button onClick ={handleClick}>Logout</button>
         </Header>
     );
 };
