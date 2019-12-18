@@ -39,8 +39,7 @@ class ArticleList extends Component {
         if(prevProps.topicSlug !== this.props.topicSlug || prevProps.user !== this.props.user) {
             window.scrollTo(0, 0)
             this.setState({page:1},()=>{ this.getArticles()})
-        }
-        if(prevState.page !== this.state.page) {
+        } else if(prevState.page !== this.state.page) {
             window.scrollTo(0, 0)
             this.getArticles()
         }
