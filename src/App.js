@@ -14,7 +14,8 @@ class App extends Component {
     name: '',
     loggedIn: false,
     users: [],
-    isLoaded: false
+    isLoaded: false,
+    sortBy:'created_at'
   };
 
   componentDidMount() {
@@ -53,6 +54,16 @@ class App extends Component {
     });
   };
 
+  handleSelectChange = ({target:{value}}) => {
+    this.setState({sortBy:value},()=>{console.log(this.state)})
+  }
+
+  handleSelectSubmit = (event) => {
+    event.preventDefault()
+    const {value} = event.target[0]
+    this.setState({sortBy:value})
+  }
+
   render() {
     if (!this.state.isLoaded) return <Loader />;
     if (!this.state.loggedIn)
@@ -65,10 +76,10 @@ class App extends Component {
     return (
       <main className='App'>
         <Header user={this.state.user} handleClick={this.handleClick} />
-        <Navbar />
+        <Navbar handleSubmit={this.handleSelectSubmit} handleChange={this.handleSelectChange}/>
         <Router>
-          <ArticleList path='/articles/*' user={this.state.user} />
-          <ArticleList path='topic/:topicSlug/' />
+          <ArticleList path='/articles/*' user={this.state.user} sortBy={this.state.sortBy}/>
+          <ArticleList path='topic/:topicSlug/' sort_by={this.state.sortBy}/>
           <ArticleList path='user/:username/' />
         </Router>
       </main>

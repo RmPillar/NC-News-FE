@@ -6,7 +6,6 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import ArticleCard from './ArticleCard';
 import Loader from './Loader'
-import Select from './Select'
 import SingleArticle from './SingleArticle';
 import ErrorDisplay from './ErrorDisplay';
 import * as api from '../utils/api'
@@ -18,7 +17,6 @@ class ArticleList extends Component {
         isLoaded: false,
         page:1,
         err: '',
-        sortBy:'created_at',
         totalCount:0
     }
 
@@ -36,7 +34,7 @@ class ArticleList extends Component {
     }
 
     componentDidUpdate(prevProps,prevState) {
-        if(prevProps.topicSlug !== this.props.topicSlug || prevProps.user !== this.props.user) {
+        if(prevProps.topicSlug !== this.props.topicSlug || prevProps.user !== this.props.user || prevProps.sortBy !== this.props.sortBy ) {
             window.scrollTo(0, 0)
             this.setState({page:1},()=>{ this.getArticles()})
         } else if(prevState.page !== this.state.page) {
@@ -50,21 +48,11 @@ class ArticleList extends Component {
         this.setState(currentState => {
           return { page: currentState.page + direction, isLoaded: false };
         });
-      };
-    
-    handleSelectChange = (event) => {
-        this.setState({sortBy:event.target.value})
-    }
-
-    handleSelectSubmit = (event) => {
-        event.preventDefault()
-        this.setState({isLoaded:false})
-        this.getArticles()
-    }
+    };
 
     getArticles = () => {
         api.getAllArticles(this.props,this.state).then(({articles,totalCount}) => {
-            this.setState({articles, totalCount, isLoaded:true,sortBy:'created_at'})
+            this.setState({articles, totalCount, isLoaded:true})
         }).catch(({response:{data:{msg}}}) => {
             this.setState({err:msg,isLoaded:true})
         })
@@ -92,8 +80,6 @@ class ArticleList extends Component {
                     <NewArticle path='/new-article' postArticle={this.postArticle}/>
                 </Router>
                 <article>
-                <Select handleSubmit={this.handleSelectSubmit} handleChange={this.handleSelectChange}/>
-                <Link to='/articles/new-article'><button>New Article</button></Link>
                     {articles.map((article, index) => {
                         return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]}/>
                     })}
