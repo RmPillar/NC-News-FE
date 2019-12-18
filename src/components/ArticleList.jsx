@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Router, Link} from '@reach/router'
-import styled from 'styled-components'
 import { Button } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
@@ -10,6 +9,7 @@ import SingleArticle from './SingleArticle';
 import ErrorDisplay from './ErrorDisplay';
 import * as api from '../utils/api'
 import NewArticle from './NewArticle';
+import {Section} from '../styledComponents/Section'
 
 class ArticleList extends Component {
     state = {
@@ -20,14 +20,7 @@ class ArticleList extends Component {
         totalCount:0
     }
 
-    Section = styled.section`
-        display:flex;
-        flex-direction:row;
-        flex-direction:row-reverse;
-        align-items:flex-start;
-        justify-content:center;
-        flex-wrap:wrap;
-    `
+
 
     componentDidMount() {
         this.getArticles()
@@ -74,7 +67,7 @@ class ArticleList extends Component {
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay/>
         return (
-            <this.Section>
+            <Section>
                 <Router>
                     <SingleArticle path=':article_id' colors={colors} user={this.props.user}/>
                     <NewArticle path='/new-article' postArticle={this.postArticle}/>
@@ -99,7 +92,7 @@ class ArticleList extends Component {
                             Next
                         </Button>}
                 </article>
-            </this.Section>
+            </Section>
         );
     }
 }
