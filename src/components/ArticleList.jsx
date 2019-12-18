@@ -3,6 +3,7 @@ import {Router, Link} from '@reach/router'
 import styled from 'styled-components'
 import { Button } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import ArticleCard from './ArticleCard';
 import Loader from './Loader'
 import Select from './Select'
@@ -17,7 +18,8 @@ class ArticleList extends Component {
         isLoaded: false,
         page:1,
         err: '',
-        sortBy:'created_at'
+        sortBy:'created_at',
+        totalCount:0
     }
 
     Section = styled.section`
@@ -34,7 +36,11 @@ class ArticleList extends Component {
     }
 
     componentDidUpdate(prevProps,prevState) {
-        if(prevProps.topicSlug !== this.props.topicSlug || prevProps.user !== this.props.user || prevState.page !== this.state.page) {
+        if(prevProps.topicSlug !== this.props.topicSlug || prevProps.user !== this.props.user) {
+            window.scrollTo(0, 0)
+            this.setState({page:1},()=>{ this.getArticles()})
+        }
+        if(prevState.page !== this.state.page) {
             window.scrollTo(0, 0)
             this.getArticles()
         }
@@ -58,8 +64,8 @@ class ArticleList extends Component {
     }
 
     getArticles = () => {
-        api.getAllArticles(this.props,this.state).then(articles => {
-            this.setState({articles, isLoaded:true,sortBy:'created_at'})
+        api.getAllArticles(this.props,this.state).then(({articles,totalCount}) => {
+            this.setState({articles, totalCount, isLoaded:true,sortBy:'created_at'})
         }).catch(({response:{data:{msg}}}) => {
             this.setState({err:msg,isLoaded:true})
         })
@@ -76,7 +82,7 @@ class ArticleList extends Component {
     }
 
     render() {
-        const {articles, isLoaded, err} = this.state
+        const {articles, isLoaded, err,totalCount,page} = this.state
         const colors = ['#26547C','#EF476F','#FFD166','#06D6A0']
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay/>
@@ -92,21 +98,21 @@ class ArticleList extends Component {
                     {articles.map((article, index) => {
                         return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]}/>
                     })}
-                    {this.state.page > 1 &&
+                    {page > 1 &&
                         <Button
                             variant='outlined'
-                            startIcon={<NavigateNextIcon />}
+                            startIcon={<NavigateBeforeIcon />}
                             onClick={this.clickHandler}
                         >
                             Previous
                         </Button>}
-                        <Button
+                        {(totalCount-(page * 10)>0) && <Button
                             variant='outlined'
                             startIcon={<NavigateNextIcon />}
                             onClick={this.clickHandler}
                         >
                             Next
-                        </Button>
+                        </Button>}
                 </article>
             </this.Section>
         );
