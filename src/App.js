@@ -5,6 +5,7 @@ import Header from './components/Header';
 import ArticleList from './components/ArticleList';
 import Navbar from './components/Navbar';
 import Login from './components/Login';
+import Loader from './components/Loader';
 import * as api from './utils/api';
 
 class App extends Component {
@@ -12,7 +13,8 @@ class App extends Component {
     user: '',
     name: '',
     loggedIn: false,
-    users: []
+    users: [],
+    isLoaded: false
   };
 
   componentDidMount() {
@@ -22,7 +24,7 @@ class App extends Component {
       loggedIn: localStorage.getItem('loggedIn') || false
     };
     api.getAllUsers().then(users => {
-      this.setState({ ...userData, users });
+      this.setState({ ...userData, users, isLoaded: true });
     });
   }
 
@@ -52,6 +54,7 @@ class App extends Component {
   };
 
   render() {
+    if (!this.state.isLoaded) return <Loader />;
     if (!this.state.loggedIn)
       return (
         <Login
