@@ -35,10 +35,22 @@ class Navbar extends Component {
     }
 
     render() {
-        const {topics} = this.state
+        const {topics, topicFilter} = this.state
         return (
             <div>
                 <this.Nav>
+                <Link to='/articles/new-article'><button>New Article</button></Link>
+                    <form onSubmit={this.props.handleSubmit}>
+                        <label>
+                            Sort By: 
+                            <select>
+                                <option value='created_at'>Date Created</option>
+                                <option value='comment_count'>Number of Comments</option>
+                                <option value='votes'>Votes</option>
+                            </select>
+                            <button>Sort</button>
+                        </label>
+                    </form>
                     <form>
                         <label>
                             Filter:
@@ -47,7 +59,7 @@ class Navbar extends Component {
                                     return<option key={slug}>{slug}</option>
                                 })}
                             </select>
-                            <Link to={`topic/${this.state.topicFilter}`}><button>Filter!</button></Link>
+                            <Link to={`topic/${topicFilter}`}><button>Filter!</button></Link>
                         </label>
                     </form>
                 </this.Nav>
