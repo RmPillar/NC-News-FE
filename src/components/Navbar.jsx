@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from '@reach/router'
-import styled from 'styled-components'
 import * as api from '../utils/api'
+import {Nav} from '../styledComponents/Nav'
 
 class Navbar extends Component {
 
@@ -10,17 +10,6 @@ class Navbar extends Component {
         topics: [],
         sortBy: ['created_at','comment_count','votes']
     }
-
-        Nav = styled.nav`
-        display: inline-block;
-        padding: 0.5rem 0;
-        margin: 0.5rem 1rem;
-        width: 90vw;
-        background: transparent;
-        color: black;
-        border: 2px solid black;
-        font-family: 'Roboto', sans-serif;
-    `
 
     componentDidMount() {
         api.getAllTopics().then(topics => {
@@ -38,7 +27,7 @@ class Navbar extends Component {
         const {topics, topicFilter} = this.state
         return (
             <div>
-                <this.Nav>
+                <Nav>
                 <Link to='/articles/new-article'><button>New Article</button></Link>
                     <form onSubmit={this.props.handleSubmit}>
                         <label>
@@ -62,7 +51,7 @@ class Navbar extends Component {
                             <Link to={`topic/${topicFilter}`}><button>Filter!</button></Link>
                         </label>
                     </form>
-                </this.Nav>
+                </Nav>
             </div>
 
         );
