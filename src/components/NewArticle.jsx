@@ -41,6 +41,12 @@ class NewArticle extends Component {
         margin-top:20px;
     `
 
+    style = {
+        color: `#26547C`,
+        border: `2px solid #26547C`, 
+        margin: '5px'
+    }
+
     goBack = () => {
         navigate('/articles')
     }
@@ -66,16 +72,16 @@ class NewArticle extends Component {
         if(!this.state.isLoaded) return <Loader/>
         return (
             <this.Form onSubmit={this.handleSubmit}>
-                <TextField name='title' variant="outlined" size='small' placeholder='Title' required onChange={this.handleChange}></TextField>
-                <TextField name='topic' select helperText="Please select the topic" value={this.state.topic} required onChange={this.handleChange}>
+                <TextField name='title' error={!this.state.title} variant="outlined" size='small' placeholder='Title' required onChange={this.handleChange}></TextField>
+                <TextField name='topic' select error={!this.state.topic} helperText="Please select the topic" value={this.state.topic} required onChange={this.handleChange}>Topic
                     {this.state.topics.map(({slug}) => {
                         return<MenuItem key={slug} value={slug} >{slug}</MenuItem>
                     })}
                 </TextField>
-                <TextField name='article' variant="outlined" rows="10" placeholder='Article' multiline required onChange={this.handleChange}></TextField>
+                <TextField name='article' error={!this.state.article} variant="outlined" rows="10" placeholder='Article' multiline required onChange={this.handleChange}></TextField>
                 <this.ButtonDiv>
-                    <Button variant='outlined' startIcon={<NavigateBeforeIcon/>}onClick={this.goBack}>Back</Button>
-                    <Button variant='outlined' type='submit' disabled={Boolean(!this.state.title && !this.state.topic && !this.state.article)}>Submit</Button>
+                    <Button variant='outlined' style={this.style} startIcon={<NavigateBeforeIcon/>}onClick={this.goBack}>Back</Button>
+                    <Button variant='outlined' style={this.style} type='submit' disabled={(!this.state.title || !this.state.topic || !this.state.article)}>Submit</Button>
                 </this.ButtonDiv>
             </this.Form>
         );
