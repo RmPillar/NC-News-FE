@@ -6,6 +6,31 @@ import { TextField, MenuItem, Button} from '@material-ui/core';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import Loader from './Loader'
 
+const Form = styled.form`
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content:space-between;
+    padding: 20px 20px 20px 20px;
+    margin: 0.5rem 1rem;
+    height: auto;
+    width: 20vw;
+    min-height: 300px;
+    min-width: 300px;
+    font-family: 'Roboto', sans-serif;
+    color: #3e3e3e;
+    background: transparent;
+    border: 2px solid #26547C;
+    border-radius: 10px;
+`
+
+const ButtonDiv = styled.div`
+    display:flex;
+    width: 200px;
+    justify-content:space-between;
+    margin-top:20px;
+`
+
 class NewArticle extends Component {
 
     state= {
@@ -15,31 +40,6 @@ class NewArticle extends Component {
         topics:[],
         isLoaded: false
     }
-
-    Form = styled.form`
-        display:flex;
-        flex-direction:column;
-        align-items: center;
-        justify-content:space-between;
-        padding: 20px 20px 20px 20px;
-        margin: 0.5rem 1rem;
-        height: auto;
-        width: 20vw;
-        min-height: 300px;
-        min-width: 300px;
-        font-family: 'Roboto', sans-serif;
-        color: #3e3e3e;
-        background: transparent;
-        border: 2px solid #26547C;
-        border-radius: 10px;
-    `
-
-    ButtonDiv = styled.div`
-        display:flex;
-        width: 200px;
-        justify-content:space-between;
-        margin-top:20px;
-    `
 
     style = {
         color: `#26547C`,
@@ -71,7 +71,7 @@ class NewArticle extends Component {
     render() {
         if(!this.state.isLoaded) return <Loader/>
         return (
-            <this.Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit}>
                 <TextField name='title' error={!this.state.title} variant="outlined" size='small' placeholder='Title' required onChange={this.handleChange}></TextField>
                 <TextField name='topic' select error={!this.state.topic} helperText="Please select the topic" value={this.state.topic} required onChange={this.handleChange}>Topic
                     {this.state.topics.map(({slug}) => {
@@ -79,11 +79,11 @@ class NewArticle extends Component {
                     })}
                 </TextField>
                 <TextField name='article' error={!this.state.article} variant="outlined" rows="10" placeholder='Article' multiline required onChange={this.handleChange}></TextField>
-                <this.ButtonDiv>
+                <ButtonDiv>
                     <Button variant='outlined' style={this.style} startIcon={<NavigateBeforeIcon/>}onClick={this.goBack}>Back</Button>
                     <Button variant='outlined' style={this.style} type='submit' disabled={(!this.state.title || !this.state.topic || !this.state.article)}>Submit</Button>
-                </this.ButtonDiv>
-            </this.Form>
+                </ButtonDiv>
+            </Form>
         );
     }
 }
