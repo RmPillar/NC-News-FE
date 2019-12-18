@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {Link} from '@reach/router'
 import styled from 'styled-components'
-import Button from './Button'
 import * as api from '../utils/api'
 
 class Navbar extends Component {
 
     state = {
-        topics: []
+        topicFilter: 'coding',
+        topics: [],
+        sortBy: ['created_at','comment_count','votes']
     }
 
         Nav = styled.nav`
@@ -29,16 +30,28 @@ class Navbar extends Component {
         })
     }
 
+    handleChange = (event) => {
+        this.setState({topicFilter:event.target.value})
+    }
+
     render() {
         const {topics} = this.state
         return (
-            <this.Nav>
-                {topics.map(({slug}) => {
-                    return <Link to ={`topic/${slug}`.toLowerCase()} key={slug}>
-                        <Button>{slug}</Button>
-                    </Link>
-                })}
-            </this.Nav>
+            <div>
+                <this.Nav>
+                    <form>
+                        <label>
+                            Filter:
+                            <select onChange={this.handleChange}>
+                                {topics.map(({slug}) => {
+                                    return<option key={slug}>{slug}</option>
+                                })}
+                            </select>
+                            <Link to={`topic/${this.state.topicFilter}`}><button>Filter!</button></Link>
+                        </label>
+                    </form>
+                </this.Nav>
+            </div>
 
         );
     }

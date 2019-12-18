@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { navigate } from '@reach/router';
-import * as api from '../utils/api'
 
 class NewArticle extends Component {
 
