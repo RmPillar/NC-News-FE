@@ -48,7 +48,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
                 <P>{`Comments: ${comment_count}`}</P>
             </section>
             <section id='buttons'>
-                <Voter id={article_id} color={color} votes={votes} type='article'/>
+                <Voter id={article_id} color={color} votes={votes} type='articles'/>
             </section>
         </Article>
     );

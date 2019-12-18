@@ -58,10 +58,9 @@ class SingleArticle extends Component {
         api.getArticleById(id)
         .then(article => {
             this.setState({article ,isLoaded:true})
+        }).catch(({response:{data:{msg}}}) => {
+            this.setState({err:msg,isLoaded:true})
         })
-        // .catch(({response}) => {
-        //     this.setState({err:msg,isLoaded:true})
-        // })
     }
     
     render() {
@@ -81,7 +80,7 @@ class SingleArticle extends Component {
                     <this.Info>
                         <p>Comments: {comment_count}</p> 
                     </this.Info>
-                    <Voter id={this.props.article_id} color={this.style.color} votes={votes} type='article'/>
+                    <Voter id={this.props.article_id} color={this.style.color} votes={votes} type='articles'/>
                 </this.Article>
                     <CommentList article_id={this.props.article_id} colors={this.props.colors}/>
            </section>
