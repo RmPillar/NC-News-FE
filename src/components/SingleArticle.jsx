@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from '@reach/router'
 import styled from 'styled-components'
-
 import moment from 'moment'
 import Loader from './Loader';
-
 import ErrorDisplay from './ErrorDisplay';
 import * as api from '../utils/api'
 import Voter from './Voter';
@@ -22,8 +20,8 @@ class SingleArticle extends Component {
         padding: 0px 20px 0px 20px;
         margin: 0.5rem 1rem;
         border-radius: 10px;
-        color: #3e3e3e;
-        background: transparent;
+        color: #FCFCFC;
+        background: #26547C;
         width: 40vw;
         min-width: 300px;
         height: auto;

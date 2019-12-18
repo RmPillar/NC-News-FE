@@ -25,9 +25,10 @@ class Navbar extends Component {
     }
 
     style = {
-        color: `#26547C`,
+        color: `#FCFCFC`,
+        background: '#26547C',
         border: `2px solid #26547C`, 
-        margin: '20px'
+        margin: '0px 20px 0px 20px'
     }
 
 

@@ -80,8 +80,8 @@ class CommentList extends Component {
     }
 
     render() {
-        if(!this.state.isLoaded) return <Loader/>
         const {viewComments, hasCommented, comments, createComment, newComment,isLoaded} = this.state
+        if(!isLoaded) return <Loader/>
         return (
             <div>
                 <Button variant='outlined' style={this.style} name='view' onClick={this.handleClick}>View Comments</Button>

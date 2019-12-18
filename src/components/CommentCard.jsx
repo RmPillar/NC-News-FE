@@ -15,9 +15,9 @@ class CommentCard extends Component {
         padding: 0.5rem 0;
         margin: 0.5rem 1rem;
         border-radius: 10px;
-        color: #3e3e3e;
-        background: transparent;
-        width: 35vw;
+        color: #FCFCFC;
+        background: ${this.props.color};
+        width: 40vw;
         min-width: 300px;
         height: auto;
         border: 2px solid ${this.props.color};

@@ -11,8 +11,8 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
         padding: 0.5rem 0;
         margin: 0.5rem 1rem;
         border-radius: 10px;
-        color: #3e3e3e;
-        background: transparent;
+        color: #FCFCFC;
+        background: ${`${color}`};
         width: 35vw;
         min-width: 300px;
         height: 200px;
@@ -24,7 +24,7 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
     `
 
     const H4 = styled.h4`
-        color:#3e3e3e;
+        color:#FCFCFC;
         &:hover {
             text-decoration: underline; 
         };
@@ -37,20 +37,20 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
 
       
     return (
-        <Article>
-            <section id='main'>
-                <Link id='name' to={`/articles/${article_id}`}>
-                    <H4>{title.length < 40 ? title : title.slice(0,40)+'...'}</H4>
-                </Link>
-                <P>{'Created By:'}<Link to={`/user/${author}`}>{author}</Link></P>
-                <P>{`Topic: ${topic}`}</P>
-                <P>Posted At: {moment(created_at).format("LT on L")}</P>
-                <P>{`Comments: ${comment_count}`}</P>
-            </section>
-            <section id='buttons'>
-                <Voter id={article_id} color={color} votes={votes} type='articles'/>
-            </section>
-        </Article>
+            <Article>
+                <section id='main'>
+                    <Link id='name' to={`/articles/${article_id}`}>
+                        <H4>{title.length < 40 ? title : title.slice(0,40)+'...'}</H4>
+                    </Link>
+                    <P>{'Created By:'}<Link to={`/user/${author}`}>{author}</Link></P>
+                    <P>{`Topic: ${topic}`}</P>
+                    <P>Posted At: {moment(created_at).format("LT on L")}</P>
+                    <P>{`Comments: ${comment_count}`}</P>
+                </section>
+                <section id='buttons'>
+                    <Voter id={article_id} color={color} votes={votes} type='articles'/>
+                </section>
+            </Article>
     );
 };
 
