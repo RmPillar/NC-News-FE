@@ -74,7 +74,7 @@ class ArticleList extends Component {
                 </Router>
                 <article>
                     {articles.map((article, index) => {
-                        return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]} isLoaded={this.isLoaded}/>
+                        return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]} isLoaded={this.isLoaded} user={this.props.user}/>
                     })}
                     {page > 1 &&
                         <Button

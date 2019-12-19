@@ -47,6 +47,11 @@ export const deleteComment = async comment_id => {
   return deletedComment;
 };
 
+export const deleteArticle = async article_id => {
+  const deletedArticle = await instance.delete(`articles/${article_id}`);
+  return deletedArticle;
+};
+
 export const postNewArticle = async ({ title, topic, article }, user) => {
   const newArticle = await instance.post(`articles`, {
     title,

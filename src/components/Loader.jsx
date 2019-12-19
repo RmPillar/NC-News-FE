@@ -1,10 +1,22 @@
 import React from 'react';
 
+import { css } from '@emotion/core';
+import PacmanLoader from 'react-spinners/PacmanLoader';
+
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
+
 const Loader = () => {
     return (
-        <div>
-            <h3>Loading....</h3>
-        </div>
+        <div className='sweet-loading'>
+        <PacmanLoader
+          css={override}
+          color={'#E1BC29'}
+        />
+      </div> 
     );
 };
 

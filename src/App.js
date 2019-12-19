@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router } from '@reach/router';
+import { Router, navigate } from '@reach/router';
 import './App.css';
 import Header from './components/Header';
 import ArticleList from './components/ArticleList';
@@ -10,7 +10,7 @@ import * as api from './utils/api';
 
 class App extends Component {
   state = {
-    user: '',
+    user: 'tickle122',
     name: '',
     loggedIn: false,
     users: [],
@@ -20,7 +20,7 @@ class App extends Component {
 
   componentDidMount() {
     const userData = {
-      user: localStorage.getItem('user') || '',
+      user: localStorage.getItem('user') || 'tickle122',
       name: localStorage.getItem('name') || '',
       loggedIn: localStorage.getItem('loggedIn') || false
     };
@@ -29,9 +29,9 @@ class App extends Component {
     });
   }
 
-  handleChange = ({ target }) => {
-    if (!this.state.user) localStorage.setItem(target.name, target.value);
-    this.setState({ [target.name]: target.value });
+  handleChange = ({ target: { name, value } }) => {
+    if (!this.loggedIn) localStorage.setItem(name, value);
+    this.setState({ [name]: value });
   };
 
   handleSubmit = event => {
@@ -41,13 +41,14 @@ class App extends Component {
       api.createUser(this.state.user, this.state.name);
     }
     this.setState({ loggedIn: true });
+    navigate('/articles');
   };
 
   handleClick = () => {
     localStorage.clear();
     this.setState(() => {
       return {
-        user: '',
+        user: 'tickle122',
         name: '',
         loggedIn: false
       };

@@ -32,9 +32,9 @@ class Navbar extends Component {
     }
 
     style = {
-        color: `#F7FFF7`,
+        color: '#F7FFF7',
         background: '#26547C',
-        border: `2px solid #26547C`, 
+        border: '2px solid #26547C', 
         margin: '0px 20px 0px 20px'
     }
 
@@ -61,7 +61,6 @@ class Navbar extends Component {
                     </TextField>     
                 </Nav>
             </div>
-
         );
     }
 }
