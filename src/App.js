@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   handleChange = ({ target }) => {
-    localStorage.setItem(target.name, target.value);
+    if (!this.state.user) localStorage.setItem(target.name, target.value);
     this.setState({ [target.name]: target.value });
   };
 
@@ -79,6 +79,7 @@ class App extends Component {
         <Navbar
           handleSubmit={this.handleSelectSubmit}
           handleChange={this.handleSelectChange}
+          sortBy={this.state.sortBy}
         />
         <Router>
           <ArticleList

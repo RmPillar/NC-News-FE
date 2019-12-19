@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Router, Link} from '@reach/router'
+import {Router} from '@reach/router'
 import { Button } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
@@ -63,7 +63,7 @@ class ArticleList extends Component {
 
     render() {
         const {articles, isLoaded, err,totalCount,page} = this.state
-        const colors = ['#26547C','#EF476F','#FFD166','#06D6A0']
+        const colors = ['#44AF69','#E84855','#FCAB10','#2B9EB3','#44355B']
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay/>
         return (
@@ -74,7 +74,7 @@ class ArticleList extends Component {
                 </Router>
                 <article>
                     {articles.map((article, index) => {
-                        return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]}/>
+                        return <ArticleCard key={article.article_id} articleData={article} color={colors[index%5]} isLoaded={this.isLoaded}/>
                     })}
                     {page > 1 &&
                         <Button

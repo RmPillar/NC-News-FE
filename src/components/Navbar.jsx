@@ -9,53 +9,52 @@ class Navbar extends Component {
     state = {
         topicFilter: 'coding',
         topics: [],
-        sortBy: ['created_at','comment_count','votes']
+        isLoaded: false
     }
 
     componentDidMount() {
         api.getAllTopics().then(topics => {
             this.setState(() => {
-                return {topics}
+                return {topics,isLoaded:true}
             })
         })
     }
 
     handleChange = (event) => {
-        this.setState({topicFilter:event.target.value})
+        this.setState({[event.target.name]:event.target.value})
     }
 
     style = {
-        color: `#FCFCFC`,
-        background: '#26547C',
-        border: `2px solid #26547C`, 
+        color: `#F7FFF7`,
+        background: '#44AF69',
+        border: `2px solid #44AF69`, 
         margin: '0px 20px 0px 20px'
     }
 
 
     render() {
         const {topics, topicFilter} = this.state
+        if(!this.state.isLoaded) return <div></div>
         return (
             <div>
                 <Nav>
                 <Link to='/articles/new-article'><Button variant='outlined' style={this.style}>Create Article</Button></Link>
                     <form onSubmit={this.props.handleSubmit}>
-                        
-                            <TextField select helperText="Sort Articles By">
-                                <MenuItem value='created_at'>Date Created</MenuItem>
-                                <MenuItem value='comment_count'>Comment Count</MenuItem>
-                                <MenuItem value='votes'>Votes</MenuItem>
-                            </TextField>
-                            <Button variant='outlined' style={this.style}>Sort</Button>
-                      
+                        <TextField name='sortBy' select value={this.props.sortBy} helperText="Sort Articles By" onChange={this.props.handleChange}>
+
+                            <MenuItem value='created_at'>Date Created</MenuItem>
+                            <MenuItem value='comment_count'>Comment Count</MenuItem>
+                            <MenuItem value='votes'>Votes</MenuItem>
+                        </TextField>
+                        <Button variant='outlined' style={this.style}>Sort</Button>          
                     </form>
                     <form>
-                        
-                            <TextField select helperText="Filter Articles By Topic"onChange={this.handleChange}>
-                                {topics.map(({slug}) => {
-                                    return<MenuItem key={slug} value={slug}>{slug}</MenuItem>
-                                })}
-                            </TextField>
-                            <Link to={`topic/${topicFilter}`}><Button variant='outlined' style={this.style}>Filter!</Button></Link>
+                        <TextField select helperText="Filter Articles By Topic" value={topicFilter} onChange={this.handleChange}>
+                            {topics.map(({slug}) => {
+                                return<MenuItem key={slug} value={slug}>{slug}</MenuItem>
+                            })}
+                        </TextField>
+                        <Link to={`topic/${topicFilter}`}><Button variant='outlined' style={this.style}>Filter!</Button></Link>
                     </form>
                 </Nav>
             </div>

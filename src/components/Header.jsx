@@ -15,24 +15,24 @@ const Header = ({user,handleClick}) => {
         padding: 0.5rem 0;
         margin: 0 0 30px 0;
         width: 100%;
-        background: #26547C;
+        background: #44AF69;
         font-family: 'Roboto', sans-serif;
         z-index:1
     `
 
     const H1 = styled.h1`
         font-size: 50px;
-        color:#FCFCFC;
+        color:#F7FFF7;
         margin: 0px 0px 0px 10px
     `
     const H2 = styled.h2`
-        color:#FCFCFC;
+        color:#F7FFF7;
         margin: 0px 10px 0px 0px;
     `
 
     const buttonStyle = {
-        color: `#FCFCFC`,
-        border: `2px solid #FCFCFC`, 
+        color: `#F7FFF7`,
+        border: `2px solid #F7FFF7`, 
         width: '100px',
         marginRight: '10px',
     }

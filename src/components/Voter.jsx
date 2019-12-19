@@ -2,7 +2,19 @@ import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import styled from 'styled-components'
 import * as api from '../utils/api'
+
+const Div = styled.div`
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+        width:250px;
+    `
+
+    const P = styled.p`
+        width: 250px
+    `
 
 class Voter extends Component {
     state = {
@@ -11,8 +23,8 @@ class Voter extends Component {
 
     style = {
         primary: {
-            color: `#FCFCFC`,
-            border: `2px solid #FCFCFC`, 
+            color: `#F7FFF7`,
+            border: `2px solid #F7FFF7`, 
             width: '100px',
             margin: '5px',
             display:'flex',
@@ -20,7 +32,7 @@ class Voter extends Component {
         },
         secondary: {
             color: `${this.props.color}`,
-            background: `#FCFCFC`,
+            background: `#F7FFF7`,
             border: `2px solid ${this.props.color}`,
             width: '100px', 
             margin: '5px',
@@ -41,16 +53,17 @@ class Voter extends Component {
 
     render() {
         return (
-            <div>
+            <Div>
+                 <P>Likes: {this.props.votes + this.state.votes}</P>
                 <Button variant='outlined' style={this.state.votes > 0 ? this.style.secondary : this.style.primary}  startIcon={<ThumbUpAltIcon />} name ='1' onClick={this.updateVote} disabled={this.state.votes>0}>
                     Like
                 </Button>
                 <Button variant='outlined' style={this.state.votes < 0 ? this.style.secondary : this.style.primary} startIcon={<ThumbDownAltIcon />} name ='-1' onClick={this.updateVote} disabled={this.state.votes<0}>
                     Dislike
                 </Button>
-                <p>Likes: {this.props.votes + this.state.votes}</p>
+               
 
-            </div>
+            </Div>
         );
     }
 }

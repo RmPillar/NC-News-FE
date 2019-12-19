@@ -3,7 +3,15 @@ import { Button, TextField } from '@material-ui/core';
 import CommentCard from './CommentCard'
 import styled from 'styled-components'
 import Loader from './Loader';
+import posed from 'react-pose';
 import * as api from '../utils/api'
+
+const Box = posed.div(
+    {
+        visible: { opacity: 1, transition: { duration: 1000 } },
+        hidden: { opacity: 0, transition: { duration: 1000 } }
+      }
+);
 
 class CommentList extends Component {
 
@@ -31,8 +39,8 @@ class CommentList extends Component {
     `
 
     style = {
-        color: `#26547C`,
-        border: `2px solid #26547C`, 
+        color: `#44AF69`,
+        border: `2px solid #44AF69`, 
         margin: '5px'
     }
 
@@ -48,8 +56,7 @@ class CommentList extends Component {
             this.setState({err:msg,isLoaded:true})
         })
     }
-
-
+    
     handleClick = ({currentTarget}) => {
         this.setState((currentState) => {
             return currentTarget.name === 'view' ? {viewComments:!currentState.viewComments} : currentTarget.name === 'create' ? {createComment:!currentState.createComment} : {}
@@ -83,8 +90,8 @@ class CommentList extends Component {
         const {viewComments, hasCommented, comments, createComment, newComment,isLoaded} = this.state
         if(!isLoaded) return <Loader/>
         return (
-            <div>
-                <Button variant='outlined' style={this.style} name='view' onClick={this.handleClick}>View Comments</Button>
+            <>
+            <Button variant='outlined' style={this.style} name='view' onClick={this.handleClick}>{viewComments ? 'Hide':'Show'} Comments</Button>
                 <Button variant='outlined' style={this.style} name='create' onClick={this.handleClick}>Comment</Button>
 
                 <this.Info>
@@ -94,6 +101,7 @@ class CommentList extends Component {
                     </form>}
                 </this.Info>
 
+                <Box classname='box' pose={viewComments ? 'visible' : 'hidden'}>
                 <this.Section >
                     {viewComments && comments.map((comment,index) => {
                         return <CommentCard 
@@ -105,7 +113,8 @@ class CommentList extends Component {
                         />
                     })}
                 </this.Section>
-            </div>
+            </Box>
+            </>
         );
     }
 }
