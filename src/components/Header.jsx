@@ -44,7 +44,7 @@ const Header = ({user,handleClick}) => {
                 <H1>NC NEWS</H1>
             </Link>
             <H2>{user}</H2>
-            <Button onClick = {handleClick} style={buttonStyle}>Logout</Button>
+            <Link to='/'><Button onClick = {handleClick} style={buttonStyle}>Logout</Button></Link>
         </Header>
     );
 };

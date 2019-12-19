@@ -3,6 +3,13 @@ import {Link} from '@reach/router'
 import * as api from '../utils/api'
 import {Nav} from '../styledComponents/Nav'
 import { TextField, MenuItem, Button} from '@material-ui/core';
+import styled from 'styled-components';
+
+
+const Form = styled.form`
+    display:flex;
+    align-items:center;
+`
 
 class Navbar extends Component {
 
@@ -39,21 +46,19 @@ class Navbar extends Component {
             <div>
                 <Nav>
                 <Link to='/articles/new-article'><Button variant='outlined' style={this.style}>Create Article</Button></Link>
-                    
-                        <TextField name='sortBy' select value={this.props.sortBy} helperText="Sort Articles By" onChange={this.props.handleChange}>
-                            <MenuItem value='created_at'>Date Created</MenuItem>
-                            <MenuItem value='comment_count'>Comment Count</MenuItem>
-                            <MenuItem value='votes'>Votes</MenuItem>
-                        </TextField>          
-                    
-                    <form>
-                        <TextField select helperText="Filter Articles By Topic" value={topicFilter} onChange={this.handleChange}>
+                    <Form>
+                        <TextField select variant='outlined' helperText="Filter Articles By Topic" value={topicFilter} onChange={this.handleChange}>
                             {topics.map(({slug}) => {
                                 return<MenuItem key={slug} value={slug}>{slug.slice(0,1).toUpperCase()+slug.slice(1)}</MenuItem>
                             })}
                         </TextField>
                         <Link to={`topic/${topicFilter}`}><Button variant='outlined' style={this.style}>Filter!</Button></Link>
-                    </form>
+                    </Form>
+                    <TextField name='sortBy' select variant='outlined' value={this.props.sortBy} helperText="Sort Articles By" onChange={this.props.handleChange}>
+                            <MenuItem value='created_at'>Date Created</MenuItem>
+                            <MenuItem value='comment_count'>Comment Count</MenuItem>
+                            <MenuItem value='votes'>Votes</MenuItem>
+                    </TextField>     
                 </Nav>
             </div>
 

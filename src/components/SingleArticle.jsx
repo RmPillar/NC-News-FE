@@ -12,7 +12,6 @@ class SingleArticle extends Component {
     state = {
         article: {},
         isLoaded:false,
-        isVisible:false,
         err:'',
         
     }
@@ -64,14 +63,14 @@ class SingleArticle extends Component {
     fetchArticleById = id => {
         api.getArticleById(id)
         .then(article => {
-            this.setState({article ,isLoaded:true},() => {this.setState({isVisible:true})})
+            this.setState({article ,isLoaded:true})
         }).catch(({response:{data:{msg}}}) => {
             this.setState({err:msg,isLoaded:true})
         })
     }
     
     render() {
-        const {isLoaded, isVisible,err, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
+        const {isLoaded, err, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay err={err}/>
         return (

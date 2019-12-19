@@ -35,11 +35,13 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
     `
     
     const P = styled.p`
-        margin:3px 10px 3px 10px;
+        margin:10px 10px 3px 10px;
     `
 
     const Div = styled.div`
-        display:flex
+        display:flex;
+        align-items:center;
+        justify-content:center;
     `
 
     return (
@@ -52,9 +54,9 @@ const ArticleCard = ({articleData:{article_id, title,author,topic,created_at,vot
                             <P>{'Created By: '}<Link to={`/user/${author}`}>{author}</Link></P>
                             <P>{`Topic: ${topic}`}</P>
                         </Div>
-                        <P>Posted At: {moment(created_at).format("LT on L")}</P>
+                        <P>Posted: {moment(created_at).fromNow()}</P>
                         <br></br>
-                        <P>{`Comments: ${comment_count}`}</P>
+                        <P>{`Comments: ${comment_count || 0}`}</P>
                     </section>
                     <section>
                         <Voter id={article_id} color={color} votes={votes} type='articles'/>
