@@ -20,8 +20,6 @@ class ArticleList extends Component {
         totalCount:0
     }
 
-
-
     componentDidMount() {
         this.getArticles()
     }

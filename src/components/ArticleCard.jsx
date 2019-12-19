@@ -6,6 +6,7 @@ import Voter from './Voter';
 import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import * as api from '../utils/api'
+import Loader from './Loader';
 
 
 const H2 = styled.h2`
@@ -50,8 +51,9 @@ class ArticleCard extends Component {
         align-items:center;
     `
 
-    deleteArticle = ({target}) => {
-        return api.deleteArticle(target.value).then(() => {
+    deleteArticle = ({currentTarget}) => {
+        console.log(currentTarget.value)
+        api.deleteArticle(currentTarget.value).then(() => {
             this.setState({isDeleted:true})
         })
     }
@@ -65,9 +67,9 @@ class ArticleCard extends Component {
     }
 
     render() {
-        const {articleData:{article_id, title,author,topic,created_at,votes,comment_count},color,isLoaded, user} = this.props
-        console.log(author,user)
+        const {articleData:{article_id, title,author,topic,created_at,votes,comment_count},color, user} = this.props
         if(this.state.isDeleted) return <h3>Your article has been deleted</h3>
+        
         return (
             <this.Article>
             <section>

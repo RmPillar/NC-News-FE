@@ -58,7 +58,7 @@ class CommentList extends Component {
     handleChange = ({target:{value}}) => {
         this.setState(() => {
             return {newComment: value}
-        })
+        },()=>{console.log(this.state)})
     }
 
     handleSubmit = (event) => {
@@ -89,7 +89,7 @@ class CommentList extends Component {
                 <this.Info>
                     {createComment && <form onSubmit={this.handleSubmit}>
                         <TextField error={!newComment} variant='outlined' placeholder='Comment' onChange={this.handleChange} value={newComment}></TextField>
-                        <Button variant='outlined' style={this.style} disabled={!newComment || hasCommented} type='submit'>Submit</Button>   
+                        <Button variant='outlined' style={this.style} disabled={!newComment.length === 0 || hasCommented} type='submit'>Submit</Button>   
                     </form>}
                 </this.Info>
 

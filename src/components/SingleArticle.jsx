@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from '@reach/router'
 import styled from 'styled-components'
+import { Button } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment'
 import Loader from './Loader';
 import ErrorDisplay from './ErrorDisplay';
@@ -12,6 +14,7 @@ class SingleArticle extends Component {
     state = {
         article: {},
         isLoaded:false,
+        isDeleted:false,
         err:'',
         
     }
@@ -50,6 +53,15 @@ class SingleArticle extends Component {
         margin: '5px'
     }
 
+    deleteStyle = {
+        color: `#F7FFF7`,
+        border: `2px solid #F7FFF7`, 
+        width: '100px',
+        margin: '5px',
+        display:'flex',
+        justifyContent: 'flex-start'
+    }
+
     componentDidMount() {
         return this.fetchArticleById(this.props.article_id)
     }
@@ -63,15 +75,22 @@ class SingleArticle extends Component {
     fetchArticleById = id => {
         api.getArticleById(id)
         .then(article => {
-            this.setState({article ,isLoaded:true})
+            this.setState({article ,isLoaded:true, isDeleted:false})
         }).catch(({response:{data:{msg}}}) => {
             this.setState({err:msg,isLoaded:true})
         })
     }
+
+    deleteArticle = ({target}) => {
+        return api.deleteArticle(target.value).then(() => {
+            this.setState({isDeleted:true})
+        }).catch(console.dir)
+    }
     
     render() {
-        const {isLoaded, err, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
+        const {isLoaded, err, isDeleted, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
         if(!isLoaded) return <Loader/>
+        if(isDeleted) return <h3>Your article has been deleted</h3>
         if(err) return <ErrorDisplay err={err}/>
         return (
                
@@ -88,12 +107,13 @@ class SingleArticle extends Component {
                         <p>Comments: {comment_count}</p> 
                     </this.Info>
                     <Voter id={this.props.article_id} color={this.style.color} votes={votes} type='articles'/>
+                    {this.props.user===author && <button value={this.props.article_id} onClick={this.deleteArticle}>Delete</button>}
                 </this.Article>
-                    <CommentList article_id={this.props.article_id} colors={this.props.colors}/>
+                    <CommentList article_id={this.props.article_id} user={this.props.user} colors={this.props.colors}/>
            </section>
                 
         );
     }
 }
-
+// style={this.deleteStyle} variant='outlined' startIcon={<DeleteIcon />}
 export default SingleArticle;
