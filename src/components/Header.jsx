@@ -15,7 +15,7 @@ const Header = ({user,handleClick}) => {
         padding: 0.5rem 0;
         margin: 0 0 30px 0;
         width: 100%;
-        background: #44AF69;
+        background: #26547C;
         font-family: 'Roboto', sans-serif;
         z-index:1
     `

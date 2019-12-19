@@ -7,14 +7,6 @@ import ErrorDisplay from './ErrorDisplay';
 import * as api from '../utils/api'
 import Voter from './Voter';
 import CommentList from './CommentList';
-import posed from 'react-pose';
-
-const Box = posed.div(
-    {
-        visible: { opacity: 1 },
-        hidden: { opacity: 0 }
-      }
-);
 
 class SingleArticle extends Component {
     state = {
@@ -30,11 +22,11 @@ class SingleArticle extends Component {
         margin: 0.5rem 1rem;
         border-radius: 10px;
         color: #F7FFF7;
-        background: #44AF69;
+        background: #26547C;
         width: 40vw;
         min-width: 300px;
         height: auto;
-        border: 2px solid #44AF69;
+        border: 2px solid #26547C;
         font-family: 'Roboto', sans-serif;
         font-size:20px;
         display:flex;
@@ -54,8 +46,8 @@ class SingleArticle extends Component {
     `
 
     style = {
-        color: `#44AF69`,
-        border: `2px solid #44AF69`, 
+        color: `#26547C`,
+        border: `2px solid #26547C`, 
         margin: '5px'
     }
 
@@ -83,10 +75,10 @@ class SingleArticle extends Component {
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay err={err}/>
         return (
-               <Box classname='box' pose={isVisible ? 'visible' : 'hidden'}>
+               
            <section>
                 <this.Article>
-                    <h2>{title}</h2>
+                    <h2>{title.toUpperCase()}</h2>
                     <this.Info>
                         <this.P>Created By:<Link to={`/user/${author}`}>{author}</Link></this.P>
                         <this.P>Topic: {topic}</this.P>
@@ -100,7 +92,7 @@ class SingleArticle extends Component {
                 </this.Article>
                     <CommentList article_id={this.props.article_id} colors={this.props.colors}/>
            </section>
-                </Box>
+                
         );
     }
 }

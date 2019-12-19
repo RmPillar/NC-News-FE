@@ -26,8 +26,8 @@ class Navbar extends Component {
 
     style = {
         color: `#F7FFF7`,
-        background: '#44AF69',
-        border: `2px solid #44AF69`, 
+        background: '#26547C',
+        border: `2px solid #26547C`, 
         margin: '0px 20px 0px 20px'
     }
 
@@ -39,19 +39,17 @@ class Navbar extends Component {
             <div>
                 <Nav>
                 <Link to='/articles/new-article'><Button variant='outlined' style={this.style}>Create Article</Button></Link>
-                    <form onSubmit={this.props.handleSubmit}>
+                    
                         <TextField name='sortBy' select value={this.props.sortBy} helperText="Sort Articles By" onChange={this.props.handleChange}>
-
                             <MenuItem value='created_at'>Date Created</MenuItem>
                             <MenuItem value='comment_count'>Comment Count</MenuItem>
                             <MenuItem value='votes'>Votes</MenuItem>
-                        </TextField>
-                        <Button variant='outlined' style={this.style}>Sort</Button>          
-                    </form>
+                        </TextField>          
+                    
                     <form>
                         <TextField select helperText="Filter Articles By Topic" value={topicFilter} onChange={this.handleChange}>
                             {topics.map(({slug}) => {
-                                return<MenuItem key={slug} value={slug}>{slug}</MenuItem>
+                                return<MenuItem key={slug} value={slug}>{slug.slice(0,1).toUpperCase()+slug.slice(1)}</MenuItem>
                             })}
                         </TextField>
                         <Link to={`topic/${topicFilter}`}><Button variant='outlined' style={this.style}>Filter!</Button></Link>

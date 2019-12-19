@@ -63,7 +63,7 @@ class ArticleList extends Component {
 
     render() {
         const {articles, isLoaded, err,totalCount,page} = this.state
-        const colors = ['#44AF69','#E84855','#FCAB10','#2B9EB3','#44355B']
+        const colors = ['#26547C','#EF476F','#E1BC29','#3BB273']
         if(!isLoaded) return <Loader/>
         if(err) return <ErrorDisplay/>
         return (
@@ -74,7 +74,7 @@ class ArticleList extends Component {
                 </Router>
                 <article>
                     {articles.map((article, index) => {
-                        return <ArticleCard key={article.article_id} articleData={article} color={colors[index%5]} isLoaded={this.isLoaded}/>
+                        return <ArticleCard key={article.article_id} articleData={article} color={colors[index%4]} isLoaded={this.isLoaded}/>
                     })}
                     {page > 1 &&
                         <Button
