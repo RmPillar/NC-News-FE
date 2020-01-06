@@ -68,7 +68,6 @@ class ArticleCard extends Component {
     render() {
         const {articleData:{article_id, title,author,topic,created_at,votes,comment_count},color, user} = this.props
         if(this.state.isDeleted) return <h3>Your article has been deleted</h3>
-        
         return (
             <this.Article>
             <section>

@@ -88,8 +88,12 @@ class App extends Component {
             user={this.state.user}
             sortBy={this.state.sortBy}
           />
-          <ArticleList path='topic/:topicSlug/' sort_by={this.state.sortBy} />
-          <ArticleList path='user/:username/' />
+          <ArticleList
+            path='topic/:topicSlug/'
+            user={this.state.user}
+            sort_by={this.state.sortBy}
+          />
+          <ArticleList path='user/:author/' user={this.state.user} />
         </Router>
       </main>
     );

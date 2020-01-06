@@ -10,13 +10,13 @@ export const getAllTopics = async () => {
 };
 
 export const getAllArticles = async (
-  { topicSlug, username, sortBy },
+  { topicSlug, author, sortBy },
   { page }
 ) => {
   const articles = await instance.get('articles', {
     params: {
       topic: topicSlug,
-      author: username,
+      author,
       p: page,
       sort_by: sortBy || 'created_at'
     }
