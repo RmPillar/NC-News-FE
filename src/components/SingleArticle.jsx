@@ -115,7 +115,7 @@ class SingleArticle extends Component {
                     <this.Info>
                         <p>Comments: {comment_count}</p> 
                     </this.Info>
-                    <Voter id={this.props.article_id} color={this.style.color} votes={votes} type='articles'/>
+                    <Voter id={this.props.article_id} color={'#26547C'} votes={votes} type='articles'/>
                     {this.props.user===author && <Button value={this.props.article_id} variant='outlined' startIcon={<DeleteIcon />} style={this.style} onClick={this.deleteArticle}>Delete</Button>}
                 </this.Article>
                     <CommentList article_id={this.props.article_id} user={this.props.user} colors={this.props.colors}/>
