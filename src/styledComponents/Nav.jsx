@@ -2,9 +2,8 @@ import styled from 'styled-components'
 
 export const Nav = styled.nav`
     display: flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    justify-items:center;
+    flex-wrap: wrap;
+    justify-content:space-around;
     align-items:center;
     padding: 0.5rem 0;
     margin: 0.5rem 1rem;
