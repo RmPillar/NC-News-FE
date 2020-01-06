@@ -31,6 +31,12 @@ const ButtonDiv = styled.div`
     margin-top:20px;
 `
 
+const style = {
+    color: `#26547C`,
+    border: `2px solid #26547C`, 
+    margin: '5px'
+}
+
 class NewArticle extends Component {
 
     state= {
@@ -39,12 +45,6 @@ class NewArticle extends Component {
         article: '',
         topics:[],
         isLoaded: false
-    }
-
-    style = {
-        color: `#26547C`,
-        border: `2px solid #26547C`, 
-        margin: '5px'
     }
 
     goBack = () => {
@@ -80,8 +80,8 @@ class NewArticle extends Component {
                 </TextField>
                 <TextField name='article' error={!this.state.article} variant="outlined" rows="10" placeholder='Article' multiline required onChange={this.handleChange}></TextField>
                 <ButtonDiv>
-                    <Button variant='outlined' style={this.style} startIcon={<NavigateBeforeIcon/>}onClick={this.goBack}>Back</Button>
-                    <Button variant='outlined' style={this.style} type='submit' disabled={(!this.state.title || !this.state.topic || !this.state.article)}>Submit</Button>
+                    <Button variant='outlined' style={style} startIcon={<NavigateBeforeIcon/>}onClick={this.goBack}>Back</Button>
+                    <Button variant='outlined' style={style} type='submit' disabled={(!this.state.title || !this.state.topic || !this.state.article)}>Submit</Button>
                 </ButtonDiv>
             </Form>
         );
