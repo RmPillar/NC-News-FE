@@ -48,7 +48,6 @@ export const deleteComment = async comment_id => {
 };
 
 export const deleteArticle = async article_id => {
-  console.log(article_id);
   const deletedArticle = await instance.delete(`articles/${article_id}`);
   return deletedArticle;
 };
