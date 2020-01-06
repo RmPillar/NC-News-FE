@@ -58,7 +58,7 @@ class CommentList extends Component {
     handleChange = ({target:{value}}) => {
         this.setState(() => {
             return {newComment: value}
-        },()=>{console.log(this.state)})
+        })
     }
 
     handleSubmit = (event) => {
