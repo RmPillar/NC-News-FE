@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Loader from './components/Loader';
 import * as api from './utils/api';
+import ErrorDisplay from './components/ErrorDisplay';
 
 class App extends Component {
   state = {
@@ -94,6 +95,7 @@ class App extends Component {
             sort_by={this.state.sortBy}
           />
           <ArticleList path='user/:author/' user={this.state.user} />
+          <ErrorDisplay default err={'404 Page Not Found'} />
         </Router>
       </main>
     );
