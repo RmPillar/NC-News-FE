@@ -86,6 +86,15 @@ class SingleArticle extends Component {
             this.setState({isDeleted:true})
         }).catch(console.dir)
     }
+
+    style = {
+        color: `#F7FFF7`,
+        border: `2px solid #F7FFF7`, 
+        width: '100px',
+        margin: '5px',
+        display:'flex',
+        justifyContent: 'center'
+    }
     
     render() {
         const {isLoaded, err, isDeleted, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
@@ -107,7 +116,7 @@ class SingleArticle extends Component {
                         <p>Comments: {comment_count}</p> 
                     </this.Info>
                     <Voter id={this.props.article_id} color={this.style.color} votes={votes} type='articles'/>
-                    {this.props.user===author && <button value={this.props.article_id} onClick={this.deleteArticle}>Delete</button>}
+                    {this.props.user===author && <Button value={this.props.article_id} variant='outlined' startIcon={<DeleteIcon />} style={this.style} onClick={this.deleteArticle}>Delete</Button>}
                 </this.Article>
                     <CommentList article_id={this.props.article_id} user={this.props.user} colors={this.props.colors}/>
            </section>
