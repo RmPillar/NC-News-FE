@@ -52,7 +52,7 @@ class CommentCard extends Component {
             <this.Section>
                 <h5><Link to={`/user/${author}`}>{author}</Link></h5>
                 <p>{body}</p>
-                <p>Posted At: {moment(created_at).format("LT on L")}</p>
+                <p>Posted: {moment(created_at).fromNow()}</p>
                 <Voter id={comment_id} color={color} votes={votes} type='comments'/>
                 {user===author && <Button name={comment_id} variant='outlined' startIcon={<DeleteIcon />} style={this.style} onClick={this.handleClick}>Delete</Button>}
             </this.Section>

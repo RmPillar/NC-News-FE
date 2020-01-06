@@ -111,7 +111,7 @@ class SingleArticle extends Component {
                         <this.P>Topic: {topic}</this.P>
                     </this.Info>
                     <p>{body}</p>
-                    <p>Posted At: {moment(created_at).format("LT on l")}</p>
+                    <p>Posted: {moment(created_at).fromNow()}</p>
                     <this.Info>
                         <p>Comments: {comment_count}</p> 
                     </this.Info>
