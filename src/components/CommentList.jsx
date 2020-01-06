@@ -5,6 +5,27 @@ import styled from 'styled-components'
 import Loader from './Loader';
 import * as api from '../utils/api'
 
+const Section = styled.section`
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+`
+
+const Info = styled.section`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-around;    
+`
+
+const style = {
+    color: `#26547C`,
+    border: `2px solid #26547C`, 
+    margin: '5px'
+}
+
+
 class CommentList extends Component {
 
     state = {
@@ -14,26 +35,6 @@ class CommentList extends Component {
         createComment: false,
         newComment: '',
         hasCommented: false
-    }
-
-    Section = styled.section`
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-`
-
-    Info = styled.section`
-        display:flex;
-        flex-direction:row;
-        align-items:center;
-        justify-content:space-around;
-    `
-
-    style = {
-        color: `#26547C`,
-        border: `2px solid #26547C`, 
-        margin: '5px'
     }
 
     componentDidMount() {
@@ -83,18 +84,16 @@ class CommentList extends Component {
         if(!isLoaded) return <Loader/>
         return (
             <>
-            <Button variant='outlined' style={this.style} name='view' onClick={this.handleClick}>{viewComments ? 'Hide':'Show'} Comments</Button>
-                <Button variant='outlined' style={this.style} name='create' onClick={this.handleClick}>Comment</Button>
+            <Button variant='outlined' style={style} name='view' onClick={this.handleClick}>{viewComments ? 'Hide':'Show'} Comments</Button>
+                <Button variant='outlined' style={style} name='create' onClick={this.handleClick}>Comment</Button>
 
-                <this.Info>
+                <Info>
                     {createComment && <form onSubmit={this.handleSubmit}>
                         <TextField error={!newComment} variant='outlined' placeholder='Comment' onChange={this.handleChange} value={newComment}></TextField>
-                        <Button variant='outlined' style={this.style} disabled={!newComment.length === 0 || hasCommented} type='submit'>Submit</Button>   
+                        <Button variant='outlined' style={style} disabled={!newComment.length === 0 || hasCommented} type='submit'>Submit</Button>   
                     </form>}
-                </this.Info>
-
-                
-                <this.Section >
+                </Info>
+                <Section >
                     {viewComments && comments.map((comment,index) => {
                         return <CommentCard 
                             key={comment.comment_id} 
@@ -104,7 +103,7 @@ class CommentList extends Component {
                             article_id={this.props.article_id}
                         />
                     })}
-                </this.Section>
+                </Section>
             </>
         );
     }
