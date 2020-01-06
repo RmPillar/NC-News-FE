@@ -42,6 +42,26 @@ const Form = styled.form`
     height: 200px;
 `
 
+const style = {
+    color: '#F7FFF7',
+    background: '#26547C',
+    border: '2px solid #F7FFF7', 
+    margin: '0px 20px 0px 20px'
+}
+
+const selectStyle = {
+    width: '200px',
+    height:'50px',
+    background: '#F7FFF7',
+}
+
+
+const inputStyle = {
+    width: '200px',
+    margin: '10px',
+    background: '#F7FFF7',
+}
+
 class Login extends Component {
 
     state= {
@@ -64,26 +84,6 @@ class Login extends Component {
         })
     }
 
-    style = {
-        color: '#F7FFF7',
-        background: '#26547C',
-        border: '2px solid #F7FFF7', 
-        margin: '0px 20px 0px 20px'
-    }
-
-    selectStyle = {
-        width: '200px',
-        height:'50px',
-        background: '#F7FFF7',
-    }
-
-
-    inputStyle = {
-        width: '200px',
-        margin: '10px',
-        background: '#F7FFF7',
-    }
-
     render() {
         const {users,isLoaded} = this.state
         if(!isLoaded) return <Loader/>
@@ -92,22 +92,22 @@ class Login extends Component {
             <H1>NC NEWS</H1>
             <Main>
                 {this.state.new && <Form onSubmit={this.props.handleSubmit}>
-                        <TextField style={this.inputStyle} name='user' placeholder='Username' onChange={this.props.handleChange}></TextField>
-                        <TextField style={this.inputStyle} name='name' placeholder='Name' onChange={this.props.handleChange}></TextField>
+                        <TextField style={inputStyle} name='user' placeholder='Username' onChange={this.props.handleChange}></TextField>
+                        <TextField style={inputStyle} name='name' placeholder='Name' onChange={this.props.handleChange}></TextField>
                     <div>
-                        <Button variant='outlined' style={this.style} onClick={this.handleClick}>Existing User</Button>
-                        <Button variant='outlined' style={this.style} type='submit'>Log In</Button>
+                        <Button variant='outlined' style={style} onClick={this.handleClick}>Existing User</Button>
+                        <Button variant='outlined' style={style} type='submit'>Log In</Button>
                     </div>
                 </Form>}
                 {!this.state.new && <Form onSubmit={this.props.handleSubmit}>
-                        <TextField style={this.selectStyle} select name='user' value={localStorage.getItem('user')} variant='filled' helperText='Username' onChange={this.props.handleChange}>
+                        <TextField style={selectStyle} select name='user' value={localStorage.getItem('user')} variant='filled' helperText='Username' onChange={this.props.handleChange}>
                         {users.map(({username}) => {
                             return<MenuItem key={username} value={username}>{username}</MenuItem>
                         })}
                         </TextField>
                     <div>
-                        <Button variant='outlined' style={this.style} onClick={this.handleClick}>New User</Button>
-                        <Button type='submit' variant='outlined' style={this.style}>Log In</Button>
+                        <Button variant='outlined' style={style} onClick={this.handleClick}>New User</Button>
+                        <Button type='submit' variant='outlined' style={style}>Log In</Button>
                     </div>
                 </Form>}
             </Main>
