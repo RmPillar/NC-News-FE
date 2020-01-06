@@ -3,9 +3,7 @@ import styled from 'styled-components'
 import {Link} from '@reach/router'
 import { Button } from '@material-ui/core';
 
-
-const Header = ({user,handleClick}) => {
-    const Header = styled.header`
+const HeaderBar = styled.header`
         position: -webkit-sticky;
         position: sticky;
         top: 0;
@@ -38,14 +36,16 @@ const Header = ({user,handleClick}) => {
     }
 
 
+const Header = ({user,handleClick}) => {
+
     return (
-        <Header>
+        <HeaderBar>
             <Link to='/articles'>
                 <H1>NC NEWS</H1>
             </Link>
             <H2>{user}</H2>
             <Link to='/'><Button onClick = {handleClick} style={buttonStyle}>Logout</Button></Link>
-        </Header>
+        </HeaderBar>
     );
 };
 
