@@ -61,9 +61,10 @@ class ArticleList extends Component {
 
     render() {
         const {articles, isLoaded, err,totalCount,page} = this.state
+        console.log(this.props)
         const colors = ['#26547C','#EF476F','#E1BC29','#3BB273']
         if(!isLoaded) return <Loader/>
-        if(err) return <ErrorDisplay/>
+        if(err || articles.length === 0) return <ErrorDisplay err={err || '404 Topic Not Found'}/>
         return (
             <Section>
                 <Router>
