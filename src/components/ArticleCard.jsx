@@ -52,7 +52,6 @@ class ArticleCard extends Component {
     `
 
     deleteArticle = ({currentTarget}) => {
-        console.log(currentTarget.value)
         api.deleteArticle(currentTarget.value).then(() => {
             this.setState({isDeleted:true})
         })
