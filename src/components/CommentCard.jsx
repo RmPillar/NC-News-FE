@@ -29,8 +29,8 @@ class CommentCard extends Component {
         font-family: 'Roboto', sans-serif;
     `
 
-    handleClick = ({target}) => {
-        return api.deleteComment(target.value).then(() => {
+    handleClick = (event) => {
+        return api.deleteComment(event.currentTarget.name).then(() => {
             this.setState({isDeleted:true})
         })
     }
@@ -54,7 +54,7 @@ class CommentCard extends Component {
                 <p>{body}</p>
                 <p>Posted At: {moment(created_at).format("LT on L")}</p>
                 <Voter id={comment_id} color={color} votes={votes} type='comments'/>
-                {user===author && <Button value={comment_id} variant='outlined' startIcon={<DeleteIcon />} style={this.style} onClick={this.handleClick}>Delete</Button>}
+                {user===author && <Button name={comment_id} variant='outlined' startIcon={<DeleteIcon />} style={this.style} onClick={this.handleClick}>Delete</Button>}
             </this.Section>
         );
     }
