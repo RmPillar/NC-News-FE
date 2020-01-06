@@ -10,6 +10,43 @@ import * as api from '../utils/api'
 import Voter from './Voter';
 import CommentList from './CommentList';
 
+const Article = styled.article`
+padding: 0px 20px 0px 20px;
+margin: 0.5rem 1rem;
+border-radius: 10px;
+color: #F7FFF7;
+background: #26547C;
+width: 40vw;
+min-width: 300px;
+height: auto;
+border: 2px solid #26547C;
+font-family: 'Roboto', sans-serif;
+font-size:20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+`
+
+const Info = styled.section`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-around;
+`
+
+const P = styled.p`
+    margin:3px 10px 3px 10px;   
+`
+
+const style = {
+    color: `#F7FFF7`,
+    border: `2px solid #F7FFF7`, 
+    width: '100px',
+    margin: '5px',
+    display:'flex',
+    justifyContent: 'flex-start'
+}
+
 class SingleArticle extends Component {
     state = {
         article: {},
@@ -17,49 +54,6 @@ class SingleArticle extends Component {
         isDeleted:false,
         err:'',
         
-    }
-
-    Article = styled.article`
-        padding: 0px 20px 0px 20px;
-        margin: 0.5rem 1rem;
-        border-radius: 10px;
-        color: #F7FFF7;
-        background: #26547C;
-        width: 40vw;
-        min-width: 300px;
-        height: auto;
-        border: 2px solid #26547C;
-        font-family: 'Roboto', sans-serif;
-        font-size:20px;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-    `
-
-    Info = styled.section`
-        display:flex;
-        flex-direction:row;
-        align-items:center;
-        justify-content:space-around;
-    `
-
-    P = styled.p`
-        margin:3px 10px 3px 10px;
-    `
-
-    style = {
-        color: `#26547C`,
-        border: `2px solid #26547C`, 
-        margin: '5px'
-    }
-
-    deleteStyle = {
-        color: `#F7FFF7`,
-        border: `2px solid #F7FFF7`, 
-        width: '100px',
-        margin: '5px',
-        display:'flex',
-        justifyContent: 'flex-start'
     }
 
     componentDidMount() {
@@ -86,15 +80,6 @@ class SingleArticle extends Component {
             this.setState({isDeleted:true})
         }).catch(console.dir)
     }
-
-    style = {
-        color: `#F7FFF7`,
-        border: `2px solid #F7FFF7`, 
-        width: '100px',
-        margin: '5px',
-        display:'flex',
-        justifyContent: 'center'
-    }
     
     render() {
         const {isLoaded, err, isDeleted, article:{title,body,votes,topic,author,created_at,comment_count}} = this.state
@@ -104,20 +89,20 @@ class SingleArticle extends Component {
         return (
                
            <section>
-                <this.Article>
+                <Article>
                     <h2>{title.toUpperCase()}</h2>
-                    <this.Info>
-                        <this.P>Created By:<Link to={`/user/${author}`}>{author}</Link></this.P>
-                        <this.P>Topic: {topic}</this.P>
-                    </this.Info>
+                    <Info>
+                        <P>Created By:<Link to={`/user/${author}`}>{author}</Link></P>
+                        <P>Topic: {topic}</P>
+                    </Info>
                     <p>{body}</p>
                     <p>Posted: {moment(created_at).fromNow()}</p>
-                    <this.Info>
+                    <Info>
                         <p>Comments: {comment_count}</p> 
-                    </this.Info>
+                    </Info>
                     <Voter id={this.props.article_id} color={'#26547C'} votes={votes} type='articles'/>
-                    {this.props.user===author && <Button value={this.props.article_id} variant='outlined' startIcon={<DeleteIcon />} style={this.style} onClick={this.deleteArticle}>Delete</Button>}
-                </this.Article>
+                    {this.props.user===author && <Button value={this.props.article_id} variant='outlined' startIcon={<DeleteIcon />} style={style} onClick={this.deleteArticle}>Delete</Button>}
+                </Article>
                     <CommentList article_id={this.props.article_id} user={this.props.user} colors={this.props.colors}/>
            </section>
                 
