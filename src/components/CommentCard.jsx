@@ -3,6 +3,8 @@ import {Link} from '@reach/router'
 import styled from 'styled-components'
 import moment from 'moment'
 import * as api from '../utils/api'
+import { Button } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Voter from './Voter';
 
 class CommentCard extends Component {
@@ -12,6 +14,9 @@ class CommentCard extends Component {
     }
 
     Section = styled.section`
+        display:flex;
+        flex-direction:column;
+        align-items:center;
         padding: 0.5rem 0;
         margin: 0.5rem 1rem;
         border-radius: 10px;
@@ -30,6 +35,15 @@ class CommentCard extends Component {
         })
     }
 
+    style = {
+        color: `#F7FFF7`,
+        border: `2px solid #F7FFF7`, 
+        width: '100px',
+        margin: '5px',
+        display:'flex',
+        justifyContent: 'center'
+    }
+
     render() {
         const {comment:{author,body,created_at,comment_id,votes},user,color} = this.props
   
@@ -40,7 +54,7 @@ class CommentCard extends Component {
                 <p>{body}</p>
                 <p>Posted At: {moment(created_at).format("LT on L")}</p>
                 <Voter id={comment_id} color={color} votes={votes} type='comments'/>
-                {user===author && <button value={comment_id}onClick={this.handleClick}>Delete</button>}
+                {user===author && <Button value={comment_id} variant='outlined' startIcon={<DeleteIcon />} style={this.style} onClick={this.handleClick}>Delete</Button>}
             </this.Section>
         );
     }
