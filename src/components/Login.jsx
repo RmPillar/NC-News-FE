@@ -10,7 +10,28 @@ const Div = styled.div`
     flex-direction:column;
     justify-content:center;
     align-items:center;
- 
+    width: 100vw;
+    height: 100vh;
+`
+
+const H1 = styled.h1`
+    font-family: 'Roboto', sans-serif;
+    font-size: 450%
+`
+
+const Main = styled.main`
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    margin: 5vw;
+    border-radius: 10px;
+    background: #26547C;
+    width: 20vw;
+    height: 50vh;
+    min-width: 300px;
+    min-height: 300px;
+    max-height: 500px;
+    font-family: 'Roboto', sans-serif;
 `
 
 const Form = styled.form`
@@ -19,20 +40,6 @@ const Form = styled.form`
     justify-content:space-around;
     align-items:center;
     height: 200px;
-`
-
-const Main = styled.main`
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    margin: 250px;
-    border-radius: 10px;
-    background: #26547C;
-    width: 20vw;
-    min-width: 300px;
-    height: 20vw;
-    min-height: 300px;
-    font-family: 'Roboto', sans-serif;
 `
 
 class Login extends Component {
@@ -82,6 +89,7 @@ class Login extends Component {
         if(!isLoaded) return <Loader/>
         return (
         <Div>
+            <H1>NC NEWS</H1>
             <Main>
                 {this.state.new && <Form onSubmit={this.props.handleSubmit}>
                         <TextField style={this.inputStyle} name='user' placeholder='Username' onChange={this.props.handleChange}></TextField>
