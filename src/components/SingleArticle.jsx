@@ -124,5 +124,4 @@ class SingleArticle extends Component {
         );
     }
 }
-// style={this.deleteStyle} variant='outlined' startIcon={<DeleteIcon />}
 export default SingleArticle;
