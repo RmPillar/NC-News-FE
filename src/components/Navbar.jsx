@@ -48,7 +48,7 @@ class Navbar extends Component {
         return (
             
                 <Nav>
-                <Link to='/articles/new-article'><Button variant='outlined' style={this.style}>Create Article</Button></Link>
+                <Link to='/articles/new-article'><Button variant='outlined' style={style}>Create Article</Button></Link>
                     <Form>
                         <TextField select variant='outlined' style={selectStyle} helperText="Filter Articles By Topic" value={topicFilter} onChange={this.handleChange}>
                             {topics.map(({slug}) => {
