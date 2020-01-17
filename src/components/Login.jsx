@@ -18,6 +18,14 @@ const H1 = styled.h1`
     font-family: 'Roboto', sans-serif;
     font-size: 450%
 `
+const H2 = styled.h2`
+    font-family: 'Roboto', sans-serif;
+    margin:5px
+`
+const H3 = styled.h3`
+    font-family: 'Roboto', sans-serif;
+    margin:5px
+`
 
 const Main = styled.main`
     display:flex;
@@ -90,7 +98,12 @@ class Login extends Component {
         return (
         <Div>
             <H1>NC NEWS</H1>
+            <H2>Welcome!!</H2>
+            <H3>To enter, please select a user from the drop down menu and click Log In</H3>
+            <H3>Or to create your own user click New User, create your own custom username and click Log In</H3>
+            <H3>Enjoy!</H3>
             <Main>
+                
                 {this.state.new && <Form onSubmit={this.props.handleSubmit}>
                         <TextField style={inputStyle} name='user' placeholder='Username' onChange={this.props.handleChange}></TextField>
                         <TextField style={inputStyle} name='name' placeholder='Name' onChange={this.props.handleChange}></TextField>
